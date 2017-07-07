@@ -8,7 +8,7 @@ import sys
 
 import enum
 
-_LOGGER = logging.getLogger(__name__)
+#_LOGGER = logging.getLogger(__name__)
 
 
 class DirWatcherEvent(enum.Enum):
@@ -61,7 +61,7 @@ class DirWatcher(object):
         watch_dir = os.path.realpath(directory)
 
         wid = self._add_dir(watch_dir)
-        _LOGGER.info('Watching directory %r (id: %r)', watch_dir, wid)
+        #_LOGGER.info('Watching directory %r (id: %r)', watch_dir, wid)
         self._watches[wid] = watch_dir
 
     @abc.abstractmethod
@@ -81,17 +81,17 @@ class DirWatcher(object):
                 break
         else:
             wid = None
-            _LOGGER.warn('Directory %r not currently watched', watch_dir)
+            #_LOGGER.warn('Directory %r not currently watched', watch_dir)
             return
 
-        _LOGGER.info('Unwatching directory %r (id: %r)', watch_dir, wid)
+        #_LOGGER.info('Unwatching directory %r (id: %r)', watch_dir, wid)
         del self._watches[wid]
         self._remove_dir(wid)
 
     @staticmethod
     def _noop(event_src):
         """Default NOOP callback"""
-        _LOGGER.debug('event on %r', event_src)
+        #_LOGGER.debug('event on %r', event_src)
         return None
 
     @abc.abstractmethod

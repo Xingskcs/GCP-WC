@@ -19,9 +19,11 @@ import fs
 import appenv
 import zkutils
 import zknamespace as z
+from appevents import appevents
+from apptrace import events
 
 #logging
-logging.basicConfig(filename = os.path.join("../../log", 'state_monitor..txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join("../../log", 'state_monitor.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -72,53 +74,133 @@ class StateMonitor(object):
             for finished_container in client.containers.list(all,filters = {"exited":"0"}):
                 finished_containers.add(finished_container.id)
 
+            killed_containers = set()
+            for killed_container in client.containers.list(all, filters = {"exited":"137"}):
+                killed_containers.add(killed_container.id)
+
+            aborted_containers = {}
+            for exited_code in range(1, 256):
+                if(exited_code != 137):
+                    for container in client.containers.list(all, filters = {"exited": str(exited_code)}):
+                        aborted_containers[container.id] = exited_code
+
             for container_id in running_containers:
                 #if container_id not in recorded_containers:
                 #check whether exited
                 if container_id in exited_containers:
-                    logging.info("exited: %s", running_containers.get(container_id))
-                    eventtime = time.time()
                     instance_name = running_containers.get(container_id)
                     _HOSTNAME = socket.gethostname()
-                    event = 'service_exited'
                     with open(os.path.join(self.tm_env.cache_dir, instance_name)) as f:
                         manifest_data = yaml.load(stream=f)
                     service = manifest_data['services'][0]['name']
-                    exitcode = '0'#assume that all containers run normally now
-                    signal = '0'
-                    data = 'uniqueueid'+'.'+service+'.'+exitcode+'.'+signal
-                    eventnode = '%s,%s,%s,%s' % (eventtime,_HOSTNAME, event,data)
-                    try:
-                        zk.create(path=z.path.task(instance_name, eventnode))
-                    except kazoo.client.NodeExistsError:
-                        logging.info(' creare node error')
 
-                    #check whether finished
+                    # if container is normally finished
                     if container_id in finished_containers:
+                        #create exited node
+                        logging.info("exited: %s", running_containers.get(container_id))
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.ServiceExitedTraceEvent(
+                                instanceid=instance_name,
+                                uniqueid=container_id,
+                                service=manifest_data['services'][0]['name'],
+                                rc='0',
+                                signal='0'
+                            )
+                        )
+                        #create finished node
                         logging.info("finished: %s", running_containers.get(container_id))
-                        finished_eventtime = time.time()
-                        finished_event = 'finished'
-                        finished_exitcode = '0'
-                        finished_signal = '0'
-                        finished_data = finished_exitcode+'.'+finished_signal
-                        finished_eventnode = '%s,%s,%s,%s' % (finished_eventtime, _HOSTNAME, finished_event, finished_data)
-                        try:
-                            zk.create(path=z.path.task(instance_name, finished_eventnode))
-                        except kazoo.client.NodeExistsError:
-                            logging.info(' creare node error')
-
-                        #if finish, should delete
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.FinishedTraceEvent(
+                                instanceid=instance_name,
+                                rc='0',
+                                signal='0',
+                                payload=''
+                            )
+                        )
+                        #create deleted node
                         logging.info("delete: %s", running_containers.get(container_id))
-                        deleted_eventtime = time.time()
-                        deleted_event = 'deleted'
-                        deleted_data = ''
-                        deleted_eventnode = '%s,%s,%s,%s'%(deleted_eventtime, _HOSTNAME, deleted_event, deleted_data)
-                        try:
-                            zk.create(path=z.path.task(instance_name, deleted_eventnode))
-                        except kazoo.client.NodeExistsError:
-                            pass
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.DeletedTraceEvent(
+                                instanceid=instance_name
+                            )
+                        )
                         zkutils.ensure_deleted(zk, z.path.scheduled(instance_name))
                         zkutils.ensure_deleted(zk, z.path.placement(_HOSTNAME+'/'+instance_name))
+                        client.containers.get(container_id).remove()
+
+                    #if container is killed
+                    elif container_id in killed_containers:
+                        #create exited node
+                        logging.info("exited: %s", running_containers.get(container_id))
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.ServiceExitedTraceEvent(
+                                instanceid=instance_name,
+                                uniqueid=container_id,
+                                service=manifest_data['services'][0]['name'],
+                                rc='137',
+                                signal='137'
+                            )
+                        )
+                        #create killed node
+                        logging.info("killed: %s", running_containers.get(container_id))
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.KilledTraceEvent(
+                                instanceid=instance_name,
+                                #is_oom=bool(exitinfo.get('oom')),
+                                is_oom = False,
+                            )
+                        )
+                        #create deleted node
+                        logging.info("delete: %s", running_containers.get(container_id))
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.DeletedTraceEvent(
+                                instanceid=instance_name
+                            )
+                        )
+                        #zkutils.ensure_deleted(zk, z.path.scheduled(instance_name))
+                        zkutils.ensure_deleted(zk, z.path.placement(_HOSTNAME + '/' + instance_name))
+                        client.containers.get(container_id).remove()
+
+                    #if container is aborted
+                    else:
+                        #create exited node
+                        logging.info("exited: %s", running_containers.get(container_id))
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.ServiceExitedTraceEvent(
+                                instanceid=instance_name,
+                                uniqueid=container_id,
+                                service=manifest_data['services'][0]['name'],
+                                rc=str(aborted_containers.get(container_id)),
+                                signal=str(aborted_containers.get(container_id))
+                            )
+                        )
+                        #create aborted node
+                        logging.info("aborted: %s", running_containers.get(container_id))
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.AbortedTraceEvent(
+                                why=str(aborted_containers.get(container_id)),
+                                instanceid=instance_name,
+                                payload=None
+                            )
+                        )
+                        #create deleted node
+                        logging.info("delete: %s", running_containers.get(container_id))
+                        appevents.post(
+                            self.tm_env.app_events_dir,
+                            events.DeletedTraceEvent(
+                                instanceid=instance_name
+                            )
+                        )
+                        # zkutils.ensure_deleted(zk, z.path.scheduled(instance_name))
+                        zkutils.ensure_deleted(zk, z.path.placement(_HOSTNAME + '/' + instance_name))
                         client.containers.get(container_id).remove()
 
                     fs.rm_safe(os.path.join(self.tm_env.running_dir, running_containers.get(container_id)))

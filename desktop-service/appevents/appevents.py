@@ -2,32 +2,42 @@
 
 
 import tempfile
-import logging
+import logging.config
 import os
 import time
+import socket
 
 import kazoo.client
+from kazoo.client import KazooClient
 import yaml
 
-from treadmill import exc
-from treadmill import dirwatch
-from treadmill import sysinfo
-from treadmill import zkutils
-from treadmill import zknamespace as z
+import sys
+sys.path.append("..")
+
+import exc
+import appenv
+import dirwatch
+import zkutils
+import zknamespace as z
 
 
-_LOGGER = logging.getLogger(__name__)
+#logging
+logging.basicConfig(filename = os.path.join("../../log", 'appevents.txt'), filemode="w", level=logging.INFO)
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
+console.setFormatter(formatter)
+logging.getLogger('').addHandler(console)
 
 _SERVERS_ACL = zkutils.make_role_acl('servers', 'rwcd')
 
-_HOSTNAME = sysinfo.hostname()
+_HOSTNAME = socket.gethostname()
 
 
 def post(events_dir, event):
     """Post application event to event directory.
     """
-    _LOGGER.debug('post: %s: %r', events_dir, event)
-
+    logging.debug('post: %s: %r', events_dir, event)
     (
         _ts,
         _src,
@@ -54,10 +64,16 @@ def post(events_dir, event):
 
 class AppEventsWatcher(object):
     """Publish app events from the queue."""
+    __slots__ = (
+        'zk',
+        'tm_env',
+        'events_dir'
+    )
 
-    def __init__(self, zkclient, events_dir):
-        self.zkclient = zkclient
-        self.events_dir = events_dir
+    def __init__(self, zk, events_dir):
+        self.tm_env = appenv.WindowsAppEnvironment(root = root)
+        self.zk = zk
+        self.events_dir = self.tm_env.app_events_dir
 
     def run(self):
         """Monitores events directory and publish events."""
@@ -83,15 +99,15 @@ class AppEventsWatcher(object):
         if localpath.startswith('.'):
             return
 
-        _LOGGER.info('New event file - %r', path)
+        logging.info('New event file - %r', path)
 
         eventtime, appname, event, data = localpath.split(',', 4)
         with open(path, mode='rb') as f:
             eventnode = '%s,%s,%s,%s' % (eventtime, _HOSTNAME, event, data)
-            _LOGGER.debug('Creating %s', z.path.task(appname, eventnode))
+            logging.debug('Creating %s', z.path.task(appname, eventnode))
             try:
                 zkutils.with_retry(
-                    self.zkclient.create,
+                    self.zk.create,
                     z.path.task(appname, eventnode),
                     f.read(),
                     acl=[_SERVERS_ACL],
@@ -102,9 +118,9 @@ class AppEventsWatcher(object):
 
         if event in ['aborted', 'killed', 'finished']:
             scheduled_node = z.path.scheduled(appname)
-            _LOGGER.info('Unscheduling, event=%s: %s', event, scheduled_node)
+            logging.info('Unscheduling, event=%s: %s', event, scheduled_node)
             zkutils.with_retry(
-                zkutils.ensure_deleted, self.zkclient,
+                zkutils.ensure_deleted, self.zk,
                 scheduled_node
             )
 
@@ -112,7 +128,7 @@ class AppEventsWatcher(object):
             try:
                 zkutils.with_retry(
                     zkutils.update,
-                    self.zkclient,
+                    self.zk,
                     z.path.task(appname),
                     {'state': event,
                      'when': eventtime,
@@ -120,6 +136,14 @@ class AppEventsWatcher(object):
                      'data': data}
                 )
             except kazoo.client.NoNodeError:
-                _LOGGER.warn('Task node not found: %s', z.path.task(appname))
+                logging.warn('Task node not found: %s', z.path.task(appname))
 
         os.unlink(path)
+
+if __name__ == '__main__':
+    root = os.path.abspath('../..')
+    master_hosts = '192.168.1.119:2181'
+    zk = KazooClient(hosts = master_hosts)
+    zk.start()
+    watcher = AppEventsWatcher(zk,root)
+    watcher.run()

@@ -23,6 +23,8 @@ import dirwatch
 import appcfg
 import zkutils
 import zknamespace as z
+from appevents import appevents
+from apptrace import events
 
 #logging
 logging.basicConfig(filename = os.path.join("../../log", 'appcfgmgr.txt'), filemode="w", level=logging.INFO)
@@ -181,19 +183,27 @@ class AppCfgMgr(object):
             manifest_data = yaml.load(stream=f)
         client = docker.from_env()
         docker_container = client.containers.create(image = 'resource',
-                                                              name = str(time.time()),
-                                                              command = manifest_data['services'][0]['command'])
+                                                    command = manifest_data['services'][0]['command'])
 
         if docker_container in client.containers.list(all):
-            eventtime = docker_container.name
-            _HOSTNAME = socket.gethostname()
-            event = 'configured'
-            data = ''
-            eventnode = '%s,%s,%s,%s' % (eventtime, _HOSTNAME, event, data)
-            try:
-                self.zk.create(path = z.path.task(instance_name, eventnode))
-            except kazoo.client.NodeExistsError:
-                logging.info(' creare node error')
+            # eventtime = time.time()
+            # _HOSTNAME = socket.gethostname()
+            # event = 'configured'
+            # data = ''
+            # eventnode = '%s,%s,%s,%s' % (eventtime, _HOSTNAME, event, data)
+            # try:
+            #     self.zk.create(path = z.path.task(instance_name, eventnode))
+            # except kazoo.client.NodeExistsError:
+            #     logging.info(' creare node error')
+            # logging.info("configure success %s", instance_name)
+
+            appevents.post(
+                self.tm_env.app_events_dir,
+                events.ConfiguredTraceEvent(
+                    instanceid=instance_name,
+                    uniqueid=docker_container.id
+                )
+            )
             logging.info("configure success %s", instance_name)
 
 
@@ -206,23 +216,33 @@ class AppCfgMgr(object):
         if canstarted:
             manifest_file = os.path.join(self.tm_env.running_dir, instance_name)
             manifest = {'container_id':docker_container.id}
-            with tempfile.NamedTemporaryFile(dir=self.tm_env.running_dir,
-                                             prefix='.%s-' % instance_name,
-                                             delete=False,
-                                             mode='w') as temp_manifest:
-                yaml.dump(manifest, stream=temp_manifest)
-            os.rename(temp_manifest.name, manifest_file)
+            if not os.path.exists(manifest_file):
+                with tempfile.NamedTemporaryFile(dir=self.tm_env.running_dir,
+                                                 prefix='.%s-' % instance_name,
+                                                 delete=False,
+                                                 mode='w') as temp_manifest:
+                    yaml.dump(manifest, stream=temp_manifest)
+                os.rename(temp_manifest.name, manifest_file)
             logging.info('Created running manifest: %s', manifest_file)
 
-            eventtime = time.time()
-            _HOSTNAME = socket.gethostname()
-            event = 'service_running'
-            data = ''
-            eventnode = '%s,%s,%s,%s' % (eventtime, _HOSTNAME, event, data)
-            try:
-                self.zk.create(path = z.path.task(instance_name, eventnode))
-            except kazoo.client.NodeExistsError:
-                logging.info(' creare node error')
+            # eventtime = time.time()
+            # _HOSTNAME = socket.gethostname()
+            # event = 'service_running'
+            # data = ''
+            # eventnode = '%s,%s,%s,%s' % (eventtime, _HOSTNAME, event, data)
+            # try:
+            #     self.zk.create(path = z.path.task(instance_name, eventnode))
+            # except kazoo.client.NodeExistsError:
+            #     logging.info(' creare node error')
+
+            appevents.post(
+                self.tm_env.app_events_dir,
+                events.ServiceRunningTraceEvent(
+                    instanceid=instance_name,
+                    uniqueid=docker_container.id,
+                    service=manifest_data['services'][0]['name']
+                )
+            )
             logging.info("running %s", instance_name)
 
 root = os.path.abspath('../..')
