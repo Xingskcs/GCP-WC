@@ -245,7 +245,8 @@ class AppCfgMgr(object):
             )
             logging.info("running %s", instance_name)
 
-root = os.path.abspath('../..')
+#root = os.path.abspath('../..')
+root = 'C:/tmp'
 master_hosts = '192.168.1.119:2181'
 zk = KazooClient(hosts = master_hosts)
 zk.start()

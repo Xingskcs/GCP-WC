@@ -141,7 +141,8 @@ class AppEventsWatcher(object):
         os.unlink(path)
 
 if __name__ == '__main__':
-    root = os.path.abspath('../..')
+    #root = os.path.abspath('../..')
+    root = 'C:/tmp'
     master_hosts = '192.168.1.119:2181'
     zk = KazooClient(hosts = master_hosts)
     zk.start()

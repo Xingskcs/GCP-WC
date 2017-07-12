@@ -2,7 +2,7 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.5.2 (C:\Users\csskx\AppData\Local\Programs\Python\Python35\python.exe)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Remote Python 3.4.5 (ssh://root@127.0.0.1:2200/home/centos/env/bin/python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">

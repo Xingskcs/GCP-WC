@@ -211,7 +211,8 @@ class StateMonitor(object):
         client = docker.from_env()
         self._run_real(client, self.zk)
 
-root = os.path.abspath('../..')
+#root = os.path.abspath('../..')
+root = 'C:/tmp'
 master_hosts = '192.168.1.119:2181'
 zk = KazooClient(hosts = master_hosts)
 zk.start()

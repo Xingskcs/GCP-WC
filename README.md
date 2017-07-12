@@ -1,2 +1,2 @@
 # GCP-WC
-Windows containers management platform。
+Windows containers management platform.
