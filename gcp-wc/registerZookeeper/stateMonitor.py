@@ -21,7 +21,6 @@ except ImportError:
     print("wtsmonitor: events.py not found", file=sys.stderr)
     sys.exit(1)
 
-import screenState
 
 #windows message
 WM_WTSSESSION_CHANGE		= 0x2B1
