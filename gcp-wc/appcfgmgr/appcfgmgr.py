@@ -27,7 +27,7 @@ from appevents import appevents
 from apptrace import events
 
 #logging
-logging.basicConfig(filename = os.path.join("../../log", 'appcfgmgr.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join("C:/tmp/log", 'appcfgmgr.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -114,11 +114,11 @@ class AppCfgMgr(object):
             return
         elif self._is_active is False:
             #Ingnore all created events while we are not running
-            print("Inactive in created event handler.")
+            logging.info("Inactive in created event handler.")
             return
         elif os.path.islink(os.path.join(self.tm_env.running_dir,
                                          instance_name)):
-            print("Event on alreadly configured %r",
+            logging.info("Event on alreadly configured %r",
                   instance_name)
             return
         elif self._configure(instance_name):

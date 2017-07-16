@@ -30,7 +30,7 @@ import fs
 import zkutils
 
 #logging
-logging.basicConfig(filename = os.path.join("../../log", 'event_daemon.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join("C:/tmp/log", 'event_daemon.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -75,12 +75,12 @@ class EventMgr(object):
                     seen.clear()
                     self._cache_notify(False)
                 else:
-                    logging.info('Presence is up.')
+                    #logging.info('Presence is up.')
                     seen.set()
                     apps = self.zk.get_children(z.path.placement(self._hostname))
                     self._synchronize(self.zk, apps)
                 return True
-            time.sleep(1)
+            time.sleep(2)
 
     def _synchronize(self, zk, expected):
         """synchronize local app cache with the expected list.

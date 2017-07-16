@@ -22,7 +22,7 @@ import zknamespace as z
 
 
 #logging
-logging.basicConfig(filename = os.path.join("../../log", 'appevents.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join("C:/tmp/log", 'appevents.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')

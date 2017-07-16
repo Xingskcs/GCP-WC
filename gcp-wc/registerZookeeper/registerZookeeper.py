@@ -39,20 +39,17 @@ class RegisterZookeeperService(object):
 
     def run(self):
         while True:
-            f = open('screen_state.txt', 'r')
-            screen_state = f.read()
-            if screen_state == 'Lock':
+            # f = open('screen_state.txt', 'r')
+            # screen_state = f.read()
+            # if screen_state == 'Lock':
+            if True:
                 node_data = self.zk.get(z.path.server('node'))
                 #For desktop, we add a 'windows' label, in order to schedule better later.
                 desktop_data = node_data[0].decode().replace('~','windows',1)
                 #update cpu info
                 remain_cpu, remain_mem, remain_disk = monitorResources.monitorResources()
-                print(remain_cpu)
-                print(remain_mem)
-                print(remain_disk)
                 update_info='cpu: {cpuinfo}%\ndisk: {diskinfo}M\nlabel: windows\nmemory: {meminfo}M\n'.format(
                             cpuinfo = remain_cpu, diskinfo = remain_disk, meminfo = remain_mem)
-                print(update_info)
                 desktop_data = update_info+desktop_data[desktop_data.find('parent'):]
                 if not self.zk.exists(z.path.server(_HOSTNAME)):
                     self.zk.create(z.path.server(_HOSTNAME), desktop_data.encode('utf-8'))
