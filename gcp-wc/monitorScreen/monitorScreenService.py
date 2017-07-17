@@ -1,10 +1,18 @@
-#!python
+"""MonitorScreen Service.
+
+Monitor the screen state, Lock or Unlock.
+"""
 from __future__ import print_function
+
 import os
 import sys
-import yaml
-import tempfile
-import subprocess
+import time
+import socket
+import logging.config
+
+import win32serviceutil
+import win32service
+import win32event
 
 try:
     import win32api as api
@@ -21,6 +29,13 @@ except ImportError:
     print("wtsmonitor: events.py not found", file=sys.stderr)
     sys.exit(1)
 
+#logging
+logging.basicConfig(filename = os.path.join("C:/tmp/log", 'screenMonitorSVC.txt'), filemode="w", level=logging.INFO)
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
+console.setFormatter(formatter)
+logging.getLogger('').addHandler(console)
 
 #windows message
 WM_WTSSESSION_CHANGE		= 0x2B1
@@ -48,19 +63,45 @@ methods = {
 	WTS_SESSION_REMOTE_CONTROL:	"SessionRemoteControl",
 }
 
+screen_state_file = 'screen_state.txt'
+
+
+class MonitorScreenSvc (win32serviceutil.ServiceFramework):
+    """Screen Monitor Service"""
+
+    _svc_name_ = "ScreenMonitorService"
+    _svc_display_name_ = "ScreenMonitorService"
+
+    def __init__(self,args):
+        win32serviceutil.ServiceFramework.__init__(self,args)
+        self.hWaitStop = win32event.CreateEvent(None,0,0,None)
+        self.root = 'C:/tmp'
+        socket.setdefaulttimeout(60)
+
+    def SvcStop(self):
+        self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
+        win32event.SetEvent(self.hWaitStop)
+
+    def SvcDoRun(self):
+        m = WTSMonitor(self.root, all_sessions=True)
+        while True:
+            m.start()
+            if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+                break
+            # m.stop()
 
 class WTSMonitor():
-
+    """Monitor Windows screen"""
     className = "WTSMonitor"
     wndName = "WTS Event Monitor"
 
-    def __init__(self, all_sessions=False):
+    def __init__(self, root, all_sessions=False):
         wc = gui.WNDCLASS()
         wc.hInstance = hInst = api.GetModuleHandle(None)
         wc.lpszClassName = self.className
         wc.lpfnWndProc = self.WndProc
         self.classAtom = gui.RegisterClass(wc)
-        #self.screenState = ScreenState()
+        self.root = root
 
         style = 0
         self.hWnd = gui.CreateWindow(self.classAtom, self.wndName,style, 0, 0, con.CW_USEDEFAULT, con.CW_USEDEFAULT,0, 0, hInst, None)
@@ -91,16 +132,17 @@ class WTSMonitor():
     def OnSession(self, event, sessionId):
         name = methods.get(event, "unknown")
         if name == 'SessionLock':
-            f = open('screen_state.txt','w')
+            logging.info("Scrren is locked!")
+            f = open(os.path.join(self.root, screen_state_file),'w')
             f.write("Lock")
             f.close()
         elif name == 'SessionUnlock':
-            f = open('screen_state.txt', 'w')
+            logging.info("Screen is unlocked!")
+            f = open(os.path.join(self.root, screen_state_file), 'w')
             f.write("Unlock")
             f.close()
 
-        print("event %s on session %d" % (methods.get(event, "unknown(0x%x)" % event), sessionId))
-
+        logging.info("event %s on session %d" % (methods.get(event, "unknown(0x%x)" % event), sessionId))
         try:
             method = getattr(events, name)
         except AttributeError:
@@ -108,6 +150,6 @@ class WTSMonitor():
 
         method(event, sessionId)
 
+
 if __name__ == '__main__':
-    m = WTSMonitor(all_sessions=True)
-    m.start()
+    win32serviceutil.HandleCommandLine(MonitorScreenSvc)
