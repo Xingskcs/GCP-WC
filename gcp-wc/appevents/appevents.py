@@ -46,6 +46,7 @@ def post(events_dir, event):
         event_data,
         payload
     ) = event.to_data()
+    print(instanceid)
     filename = '%s,%s,%s,%s' % (
         time.time(),
         instanceid,
