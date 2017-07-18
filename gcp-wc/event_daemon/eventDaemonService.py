@@ -162,11 +162,15 @@ def cache_notify(root, is_seen):
     """
     if is_seen:
         # Mark the cache folder as ready.
+        if not os.path.exists(os.path.join(os.path.join(root, CACHE_DIR), _SEEN_FILE)):
+            fp = open(os.path.join(os.path.join(root, CACHE_DIR), _SEEN_FILE), 'w')
+            fp.close()
         with open(os.path.join(os.path.join(root, CACHE_DIR), _SEEN_FILE), 'w+'):
             pass
     else:
         # Mark the cache folder as outdated.
-        os.unlink(os.path.join(os.path.join(root, CACHE_DIR), _SEEN_FILE))
+        if os.path.exists(os.path.join(os.path.join(root, CACHE_DIR), _SEEN_FILE)):
+            os.unlink(os.path.join(os.path.join(root, CACHE_DIR), _SEEN_FILE))
 
 def zkget(zkclient, path, watcher=None, strict=True, need_metadata=False):
     """Read content of Zookeeper node and return YAML parsed object."""

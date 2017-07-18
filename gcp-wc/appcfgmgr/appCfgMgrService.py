@@ -82,6 +82,9 @@ def configure(zk, instance_name):
     :returns ``bool``:
         True for successfully configured container.
     """
+    if instance_name[0] == '.':
+        # Ignore all dot files
+        return
     time.sleep(3)
     event_file = os.path.join(
         os.path.join('C:/tmp', CACHE_DIR),
@@ -132,28 +135,15 @@ def configure(zk, instance_name):
                 service=manifest_data['services'][0]['name']
             )
         )
-        app_data = zk.get(path.scheduled(instance_name))
-        zk.create(path.running(instance_name), app_data.encode('utf-8'))
+        # app_data = zk.get(path_scheduled(instance_name))
+        # zk.create(path_running(instance_name), app_data.encode('utf-8'))
         logging.info("running %s", instance_name)
 
-def join_zookeeper_path(root, *child):
-    """"Returns zookeeper path joined by slash."""
-    return '/'.join((root,) + child)
+def path_scheduled(instance_name):
+    return SCHEDULED+'/'+instance_name
 
-
-def make_path_f(zkpath):
-    """"Return closure that will construct node path."""
-    return staticmethod(functools.partial(join_zookeeper_path, zkpath))
-
-
-path = collections.namedtuple('path', """
-    running
-    scheduled
-    """)
-
-path.running = make_path_f(RUNNING)
-path.scheduled = make_path_f(SCHEDULED)
-
+def path_running(instance_name):
+    return RUNNING +'/'+instance_name
 
 def post(events_dir, event):
     """Post application event to event directory.

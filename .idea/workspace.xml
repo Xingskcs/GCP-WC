@@ -2,28 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cd19147-6940-4d19-9cdf-a0bbf63e9a89" name="Default" comment="appevents;killed events;aborted events">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appcfg/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appcfg/abort.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appcfg/configure.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appcfg/features/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appcfg/features/feature_base.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appcfg/manifest.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appenv.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appevents/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/appevents/appevents.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/apptrace/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/apptrace/events.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/apptrace/printer.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/apptrace/zk.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/dirwatch/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/dirwatch/dirwatch_base.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/dirwatch/linux_dirwatch.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/dirwatch/windows_dirwatch.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/exc.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/fs.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/zknamespace.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gcp-wc/zkutils.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gcp-wc/Test.py" afterPath="$PROJECT_DIR$/gcp-wc/Test.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py" afterPath="$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py" afterPath="$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,13 +17,115 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cleanupService.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py">
+      <file leaf-file-name="stateMonitorService.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/statemonitor/stateMonitorService.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="76" column="8" lean-forward="true" selection-start-line="76" selection-start-column="8" selection-end-line="78" selection-end-column="50" />
+            <state relative-caret-position="1275">
+              <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="70" selection-end-column="18" />
               <folding>
-                <element signature="e#33#42#0" expanded="true" />
+                <element signature="e#72#81#0" expanded="true" />
+                <element signature="e#9811#10563#0" expanded="false" />
+                <element signature="e#10621#14080#0" expanded="false" />
+                <element signature="e#14129#15009#0" expanded="false" />
+                <element signature="e#15056#15597#0" expanded="false" />
+                <element signature="e#15647#16550#0" expanded="false" />
+                <element signature="e#16597#17114#0" expanded="false" />
+                <element signature="e#17162#18223#0" expanded="false" />
+                <element signature="e#18270#19128#0" expanded="false" />
+                <element signature="e#19174#20120#0" expanded="false" />
+                <element signature="e#20174#21362#0" expanded="false" />
+                <element signature="e#21415#22877#0" expanded="false" />
+                <element signature="e#22921#23294#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/Test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appCfgMgrService.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="137" column="8" lean-forward="false" selection-start-line="137" selection-start-column="10" selection-end-line="138" selection-end-column="74" />
+              <folding>
+                <element signature="e#149#158#0" expanded="true" />
+                <element signature="e#4851#5603#0" expanded="false" />
+                <element signature="e#5661#9120#0" expanded="false" />
+                <element signature="e#9169#10049#0" expanded="false" />
+                <element signature="e#10096#10637#0" expanded="false" />
+                <element signature="e#10687#11590#0" expanded="false" />
+                <element signature="e#11637#12154#0" expanded="false" />
+                <element signature="e#12202#13263#0" expanded="false" />
+                <element signature="e#13310#14168#0" expanded="false" />
+                <element signature="e#14214#15160#0" expanded="false" />
+                <element signature="e#15214#16402#0" expanded="false" />
+                <element signature="e#16455#17917#0" expanded="false" />
+                <element signature="e#17961#18334#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eventDaemonService.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3825">
+              <caret line="166" column="21" lean-forward="false" selection-start-line="166" selection-start-column="21" selection-end-line="166" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/kazoo/client.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1000">
+              <caret line="106" column="8" lean-forward="false" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registerZookeeperService.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1375">
+              <caret line="64" column="17" lean-forward="false" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="updateResourcesService.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/updateResources/updateResourcesService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="32" column="18" lean-forward="false" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="watchdogService.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="277" column="28" lean-forward="true" selection-start-line="277" selection-start-column="28" selection-end-line="277" selection-end-column="28" />
+              <folding>
+                <element signature="e#97#106#0" expanded="true" />
+                <element signature="e#700#5404#0" expanded="false" />
+                <element signature="e#6348#6369#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -103,19 +187,20 @@
         <option value="$PROJECT_DIR$/gcp-wc/screenMonitor/screenMonitorService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/monitorScreen/screenMonitorService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/registerZookeeper/stateMonitor.py" />
-        <option value="$PROJECT_DIR$/gcp-wc/Test.py" />
         <option value="$PROJECT_DIR$/gcp-wc/monitorScreen/monitorScreenService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/updateResources/updateResourcesService.py" />
-        <option value="$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/appcfgmgr/AppCfgMgrService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/appcfgmgr/appcfgmgr.py" />
         <option value="$PROJECT_DIR$/gcp-wc/statemonitor/state_monitor.py" />
-        <option value="$PROJECT_DIR$/gcp-wc/statemonitor/stateMonitorService.py" />
-        <option value="$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/appevents/appevents.py" />
         <option value="$PROJECT_DIR$/gcp-wc/appevents/appeventService.py" />
+        <option value="$PROJECT_DIR$/gcp-wc/statemonitor/stateMonitorService.py" />
+        <option value="$PROJECT_DIR$/gcp-wc/Test.py" />
+        <option value="$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py" />
+        <option value="$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py" />
+        <option value="$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py" />
       </list>
     </option>
   </component>
@@ -149,6 +234,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -175,9 +261,80 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gcp-wc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="watchdog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gcp-wc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="registerZookeeper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gcp-wc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="event_daemon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gcp-wc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appcfgmgr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -414,9 +571,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2256839" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2287234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23114754" sideWeight="0.50911856" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23114754" sideWeight="0.49088147" order="2" side_tool="false" content_ui="tabs" />
@@ -475,7 +631,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/__init__.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/helloworld.py" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
@@ -498,13 +653,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/screenState.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/kazoo/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29775">
-          <caret line="1257" column="25" lean-forward="false" selection-start-line="1257" selection-start-column="25" selection-end-line="1257" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/kazoo/handlers/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -529,13 +677,7 @@
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/__init__.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/PythonService.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/TtestService.py" />
-    <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/__init__.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/HaService.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/collections/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -547,78 +689,70 @@
     <entry file="file://$PROJECT_DIR$/screenMonitor.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/screen_state.txt" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/stateMonitor.py" />
-    <entry file="file://$PROJECT_DIR$/gcp-wc/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3333">
-          <caret line="142" column="4" lean-forward="false" selection-start-line="142" selection-start-column="4" selection-end-line="142" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/monitorResources.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeper.py" />
-    <entry file="file://$PROJECT_DIR$/gcp-wc/monitorScreen/monitorScreenService.py">
+    <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/event_daemon.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/linux_dirwatch.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/appcfg/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/apptrace/events.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/dirwatch_base.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/appcfgmgr.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/statemonitor/state_monitor.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanup.py" />
+    <entry file="file://$USER_HOME$/.PyCharmCE2017.1/system/python_stubs/-201147080/errno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="808">
-          <caret line="88" column="96" lean-forward="false" selection-start-line="88" selection-start-column="96" selection-end-line="88" selection-end-column="96" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/event_daemon.py" />
-    <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py">
+    <entry file="file://$PROJECT_DIR$/gcp-wc/fs.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/windows_dirwatch.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/appenv.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/zkutils.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/appevents/appevents.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/zknamespace.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/appevents/appeventService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="83" column="30" lean-forward="false" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="30" />
+        <state relative-caret-position="25">
+          <caret line="35" column="18" lean-forward="true" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="38" column="18" lean-forward="true" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/monitorScreen/monitorScreenService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="71" column="38" lean-forward="false" selection-start-line="71" selection-start-column="18" selection-end-line="71" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gcp-wc/updateResources/updateResourcesService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="46" column="43" lean-forward="true" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/linux_dirwatch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-375">
-          <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/appcfg/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2675">
-          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="118" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/apptrace/events.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1975">
-          <caret line="82" column="8" lean-forward="false" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="8" />
+        <state relative-caret-position="550">
+          <caret line="32" column="18" lean-forward="false" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/dirwatch_base.py">
+    <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4650">
-          <caret line="192" column="22" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="192" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/appcfgmgr.py" />
-    <entry file="file://$PROJECT_DIR$/gcp-wc/statemonitor/state_monitor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4600">
-          <caret line="194" column="22" lean-forward="false" selection-start-line="194" selection-start-column="17" selection-end-line="194" selection-end-column="22" />
+        <state relative-caret-position="1375">
+          <caret line="64" column="17" lean-forward="false" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gcp-wc/statemonitor/stateMonitorService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
+        <state relative-caret-position="1275">
           <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="70" selection-end-column="18" />
           <folding>
             <element signature="e#72#81#0" expanded="true" />
@@ -638,124 +772,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanup.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/kazoo/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="64" column="4" lean-forward="true" selection-start-line="64" selection-start-column="4" selection-end-line="86" selection-end-column="12" />
+        <state relative-caret-position="1000">
+          <caret line="106" column="8" lean-forward="false" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2017.1/system/python_stubs/-201147080/errno.py">
+    <entry file="file://$PROJECT_DIR$/gcp-wc/Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="350">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3825">
+          <caret line="166" column="21" lean-forward="false" selection-start-line="166" selection-start-column="21" selection-end-line="166" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="277" column="28" lean-forward="true" selection-start-line="277" selection-start-column="28" selection-end-line="277" selection-end-column="28" />
+          <folding>
+            <element signature="e#97#106#0" expanded="true" />
+            <element signature="e#700#5404#0" expanded="false" />
+            <element signature="e#6348#6369#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="20" />
+        <state relative-caret-position="257">
+          <caret line="137" column="8" lean-forward="false" selection-start-line="137" selection-start-column="10" selection-end-line="138" selection-end-column="74" />
           <folding>
             <element signature="e#149#158#0" expanded="true" />
-            <element signature="e#5063#5815#0" expanded="false" />
-            <element signature="e#5873#9332#0" expanded="false" />
-            <element signature="e#9381#10261#0" expanded="false" />
-            <element signature="e#10308#10849#0" expanded="false" />
-            <element signature="e#10899#11802#0" expanded="false" />
-            <element signature="e#11849#12366#0" expanded="false" />
-            <element signature="e#12414#13475#0" expanded="false" />
-            <element signature="e#13522#14380#0" expanded="false" />
-            <element signature="e#14426#15372#0" expanded="false" />
-            <element signature="e#15426#16614#0" expanded="false" />
-            <element signature="e#16667#18129#0" expanded="false" />
-            <element signature="e#18173#18546#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/fs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="31" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="50" column="19" lean-forward="true" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="7" column="51" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/windows_dirwatch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="10" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/appenv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="13" column="4" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/zkutils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-203">
-          <caret line="417" column="64" lean-forward="false" selection-start-line="417" selection-start-column="58" selection-end-line="417" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/appevents/appevents.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1622">
-          <caret line="141" column="8" lean-forward="false" selection-start-line="141" selection-start-column="8" selection-end-line="141" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/zknamespace.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1075">
-          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/appevents/appeventService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-600">
-          <caret line="59" column="40" lean-forward="false" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
-          <folding>
-            <element signature="e#26#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="76" column="8" lean-forward="true" selection-start-line="76" selection-start-column="8" selection-end-line="78" selection-end-column="50" />
-          <folding>
-            <element signature="e#33#42#0" expanded="true" />
+            <element signature="e#4851#5603#0" expanded="false" />
+            <element signature="e#5661#9120#0" expanded="false" />
+            <element signature="e#9169#10049#0" expanded="false" />
+            <element signature="e#10096#10637#0" expanded="false" />
+            <element signature="e#10687#11590#0" expanded="false" />
+            <element signature="e#11637#12154#0" expanded="false" />
+            <element signature="e#12202#13263#0" expanded="false" />
+            <element signature="e#13310#14168#0" expanded="false" />
+            <element signature="e#14214#15160#0" expanded="false" />
+            <element signature="e#15214#16402#0" expanded="false" />
+            <element signature="e#16455#17917#0" expanded="false" />
+            <element signature="e#17961#18334#0" expanded="false" />
           </folding>
         </state>
       </provider>
