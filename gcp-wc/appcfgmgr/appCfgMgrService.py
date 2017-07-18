@@ -13,7 +13,10 @@ import yaml
 import docker
 import socket
 import tempfile
+import functools
+import collections
 import logging.config
+from kazoo.client import KazooClient
 
 import enum
 
@@ -35,6 +38,9 @@ CACHE_DIR = 'cache'
 RUNNING_DIR = 'running'
 APP_EVENTS_DIR = 'appevents'
 
+RUNNING = '/running'
+SCHEDULED = '/scheduled'
+
 class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
     """AppCfgMgr Service"""
 
@@ -52,6 +58,9 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
+        master_hosts = '192.168.1.119:2181'
+        zk = KazooClient(hosts=master_hosts)
+        zk.start()
         while True:
             cached_files = glob.glob(
                 os.path.join(os.path.join(self.root, CACHE_DIR), '*')
@@ -61,11 +70,11 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
             )
             for file_name in set(cached_files) - set(running_links):
                 if not os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), os.path.basename(file_name))):
-                    configure(os.path.basename(file_name))
+                    configure(zk, os.path.basename(file_name))
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
 
-def configure(instance_name):
+def configure(zk, instance_name):
     """Configures and starts the instance based on instance cached event.
 
     :param ``str`` instance_name:
@@ -73,7 +82,6 @@ def configure(instance_name):
     :returns ``bool``:
         True for successfully configured container.
     """
-    logging.info(11111111111111111111111111111111)
     time.sleep(3)
     event_file = os.path.join(
         os.path.join('C:/tmp', CACHE_DIR),
@@ -124,7 +132,27 @@ def configure(instance_name):
                 service=manifest_data['services'][0]['name']
             )
         )
+        app_data = zk.get(path.scheduled(instance_name))
+        zk.create(path.running(instance_name), app_data.encode('utf-8'))
         logging.info("running %s", instance_name)
+
+def join_zookeeper_path(root, *child):
+    """"Returns zookeeper path joined by slash."""
+    return '/'.join((root,) + child)
+
+
+def make_path_f(zkpath):
+    """"Return closure that will construct node path."""
+    return staticmethod(functools.partial(join_zookeeper_path, zkpath))
+
+
+path = collections.namedtuple('path', """
+    running
+    scheduled
+    """)
+
+path.running = make_path_f(RUNNING)
+path.scheduled = make_path_f(SCHEDULED)
 
 
 def post(events_dir, event):
