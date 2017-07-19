@@ -241,25 +241,33 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
         services.append(update_resources)
 
         self._start(services)
+        previous_state = zk.state
         while True:
-            if zk.state == 'CONNECTED':
-                if self._serviceStatus(services):
-                    zk.ensure_path(server_presence())
+            try:
+                if zk.state == 'CONNECTED':
+                    if previous_state == 'SUSPENDED':
+                        self._start(services)
+                    if self._serviceStatus(services):
+                        #zk.ensure_path(server_presence())
+                        pass
+                    else:
+                        self._stop(services)
+                        if zk.exists(server_presence()):
+                            zk.delete(server_presence())
                 else:
                     self._stop(services)
                     if zk.exists(server_presence()):
                         zk.delete(server_presence())
-            else:
-                self._stop(services)
-                if zk.exists(server_presence()):
-                    zk.delete(server_presence())
-                try:
-                    zk.start()
-                except:
-                    pass
-
+                    try:
+                        zk.start()
+                    except:
+                        pass
+            except:
+                pass
+            previous_state = zk.state
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
+
 
     def _start(self, services):
         for service in services:
@@ -274,7 +282,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
     def _serviceStatus(self, services):
         for service in services:
             if service.status() == 'STOPPED':
-                logging.info('11111111111111'+str(service.name))
+                #logging.info('11111111111111'+str(service.name))
                 return False
         return True
 
