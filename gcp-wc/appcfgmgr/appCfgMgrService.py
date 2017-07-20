@@ -12,9 +12,8 @@ import time
 import yaml
 import docker
 import socket
+import shutil
 import tempfile
-import functools
-import collections
 import logging.config
 from kazoo.client import KazooClient
 
@@ -37,6 +36,7 @@ _HOSTNAME = socket.gethostname()
 CACHE_DIR = 'cache'
 RUNNING_DIR = 'running'
 APP_EVENTS_DIR = 'appevents'
+CLEANUP_DIR = 'cleanup'
 
 RUNNING = '/running'
 SCHEDULED = '/scheduled'
@@ -71,6 +71,14 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
             for file_name in set(cached_files) - set(running_links):
                 if not os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), os.path.basename(file_name))):
                     configure(zk, os.path.basename(file_name))
+
+            # for file_name in set(running_links) - set(cached_files):
+            #     instanceName = os.path.basename(file_name)
+            #     if os.path.exists(
+            #             os.path.join(os.path.join(self.root, RUNNING_DIR), instanceName)):
+            #         shutil.copy(
+            #             os.path.join(os.path.join(self.root, RUNNING_DIR), instanceName),
+            #             os.path.join(self.root, CLEANUP_DIR))
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
 

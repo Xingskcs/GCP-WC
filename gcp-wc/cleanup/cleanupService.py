@@ -2,6 +2,7 @@
 
 """
 import os
+import time
 import glob
 import yaml
 import errno
@@ -80,12 +81,10 @@ class CleanupSvc (win32serviceutil.ServiceFramework):
         if zk.exists(path.placement(_HOSTNAME + '/' + instance_name)):
             zk.delete(path.placement(_HOSTNAME + '/' + instance_name))
         rm_safe(os.path.join(os.path.join(self.root, CACHE_DIR), instance_name))
-        rm_safe(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name))
-        if zk.exists(path.running(instance_name)):
-            zk.delete(path.running(instance_name))
         with open(os.path.join(os.path.join(self.root, CLEANUP_DIR), instance_name)) as f:
             manifest_data = yaml.load(stream=f)
         client.containers.get(manifest_data['container_id']).remove()
+        rm_safe(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name))
         rm_safe(event_file)
         pass
 

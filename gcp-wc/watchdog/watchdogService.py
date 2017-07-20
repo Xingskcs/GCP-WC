@@ -282,7 +282,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
     def _serviceStatus(self, services):
         for service in services:
             if service.status() == 'STOPPED':
-                #logging.info('11111111111111'+str(service.name))
+                logging.info('11111111111111'+str(service.name))
                 return False
         return True
 

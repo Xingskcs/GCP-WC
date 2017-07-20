@@ -3,6 +3,9 @@
 When the screen is locked, register zookeeper.
 """
 import os
+import glob
+import yaml
+import docker
 import socket
 import collections
 import functools
@@ -23,10 +26,13 @@ logging.getLogger('').addHandler(console)
 
 SERVERS = '/servers'
 SERVER_PRESENCE = '/server.presence'
+BLACKEDOUT_SERVERS = '/blackedout.servers'
 
 screen_state_file = 'screen_state.txt'
 
 _HOSTNAME = socket.gethostname()
+RUNNING_DIR = 'running'
+CLEANUP_DIR = 'cleanup'
 
 class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
     """Register Zookeeper Service"""
@@ -48,6 +54,7 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
         master_hosts = '192.168.1.119:2181'
         zk = KazooClient(hosts = master_hosts)
         zk.start()
+        client = docker.from_env()
         while True:
             f = open(os.path.join(self.root, screen_state_file), 'r')
             screen_state = f.read()
@@ -59,7 +66,19 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
                 if not zk.exists(path.server(_HOSTNAME)):
                     zk.create(path.server(_HOSTNAME), desktop_data.encode('utf-8'))
                     logging.info("Create servers node: %s", _HOSTNAME)
-                if not zk.exists(path.server_presence(_HOSTNAME)):
+                if zk.exists(path.blackedout_server(_HOSTNAME)):
+                    running_links = glob.glob(
+                        os.path.join(os.path.join(self.root, RUNNING_DIR), '*')
+                    )
+                    for file_name in set(running_links):
+                        with open(os.path.join(file_name)) as f:
+                            manifest_data = yaml.load(stream=f)
+                        try:
+                            if client.containers.get(manifest_data['container_id']).status == 'running':
+                                client.containers.get(manifest_data['container_id']).kill()
+                        except:
+                            pass
+                elif not zk.exists(path.server_presence(_HOSTNAME)):
                     zk.create(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'), ephemeral=True)
                     logging.info("Create server.presence node: %s", _HOSTNAME)
             else:
@@ -81,11 +100,13 @@ def make_path_f(zkpath):
 
 path = collections.namedtuple('path', """
     server_presence
+    blackedout_server
     server
     """)
 
 path.server_presence = make_path_f(SERVER_PRESENCE)
 path.server = make_path_f(SERVERS)
+path.blackedout_server = make_path_f(BLACKEDOUT_SERVERS)
 
 if __name__ == '__main__':
     win32serviceutil.HandleCommandLine(RegisterZookeeperSvc)
