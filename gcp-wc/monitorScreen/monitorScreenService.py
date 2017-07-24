@@ -6,7 +6,6 @@ from __future__ import print_function
 
 import os
 import sys
-import time
 import socket
 import logging.config
 
@@ -30,7 +29,7 @@ except ImportError:
     sys.exit(1)
 
 #logging
-logging.basicConfig(filename = os.path.join("C:/tmp/log", 'screenMonitorSVC.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join(os.path.join(os.getenv("workDirectory"),'log'), 'screenMonitorSVC.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -75,7 +74,7 @@ class MonitorScreenSvc (win32serviceutil.ServiceFramework):
     def __init__(self,args):
         win32serviceutil.ServiceFramework.__init__(self,args)
         self.hWaitStop = win32event.CreateEvent(None,0,0,None)
-        self.root = 'C:/tmp'
+        self.root = os.getenv("workDirectory")
         socket.setdefaulttimeout(60)
 
     def SvcStop(self):

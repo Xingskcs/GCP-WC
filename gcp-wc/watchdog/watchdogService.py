@@ -6,8 +6,6 @@ import os
 import time
 import socket
 import datetime
-import collections
-import functools
 import logging.config
 from kazoo.client import KazooClient
 
@@ -16,7 +14,7 @@ import win32service
 import win32event
 
 #logging
-logging.basicConfig(filename = os.path.join("C:/tmp/log", 'watchdogSVC.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join(os.path.join(os.getenv("workDirectory"),'log'), 'watchdogSVC.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -169,7 +167,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
     def __init__(self,args):
         win32serviceutil.ServiceFramework.__init__(self,args)
         self.hWaitStop = win32event.CreateEvent(None,0,0,None)
-        self.root = 'C:/tmp'
+        self.root = os.getenv("workDirectory")
         socket.setdefaulttimeout(60)
 
     def SvcStop(self):
@@ -220,7 +218,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
     #         if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
     #             break
     def SvcDoRun(self):
-        master_hosts = '192.168.1.119:2181'
+        master_hosts = os.getenv("zookeeper")
         zk = KazooClient(hosts=master_hosts)
         zk.start()
 

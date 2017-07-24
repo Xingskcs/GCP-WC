@@ -27,7 +27,7 @@ import win32service
 import win32event
 
 #logging
-logging.basicConfig(filename = os.path.join("C:/tmp/log", 'eventDaemonSVC.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join(os.path.join(os.getenv("workDirectory"),'log'), 'eventDaemonSVC.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -53,7 +53,7 @@ class EventDaemonSvc (win32serviceutil.ServiceFramework):
     def __init__(self,args):
         win32serviceutil.ServiceFramework.__init__(self,args)
         self.hWaitStop = win32event.CreateEvent(None,0,0,None)
-        self.root = 'C:/tmp'
+        self.root = os.getenv("workDirectory")
         socket.setdefaulttimeout(60)
 
     def SvcStop(self):
@@ -61,7 +61,7 @@ class EventDaemonSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = '192.168.1.119:2181'
+        master_hosts = os.getenv("zookeeper")
         zk = KazooClient(hosts = master_hosts)
         zk.start()
         seen = zk.handler.event_object()

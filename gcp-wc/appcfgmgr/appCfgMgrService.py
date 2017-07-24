@@ -12,7 +12,6 @@ import time
 import yaml
 import docker
 import socket
-import shutil
 import tempfile
 import logging.config
 from kazoo.client import KazooClient
@@ -24,7 +23,7 @@ import win32service
 import win32event
 
 #logging
-logging.basicConfig(filename = os.path.join("C:/tmp/log", 'appCfgMgrSVC.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join(os.path.join(os.getenv("workDirectory"),'log'), 'appCfgMgrSVC.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -50,7 +49,7 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
     def __init__(self,args):
         win32serviceutil.ServiceFramework.__init__(self,args)
         self.hWaitStop = win32event.CreateEvent(None,0,0,None)
-        self.root = 'C:/tmp'
+        self.root = os.getenv("workDirectory")
         socket.setdefaulttimeout(60)
 
     def SvcStop(self):
@@ -58,7 +57,7 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = '192.168.1.119:2181'
+        master_hosts = os.getenv("zookeeper")
         zk = KazooClient(hosts=master_hosts)
         zk.start()
         client = docker.from_env()
@@ -71,11 +70,11 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
             )
             for file_name in set(cached_files) - set(running_links):
                 if not os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), os.path.basename(file_name))):
-                    configure(zk, client, os.path.basename(file_name))
+                    configure(zk, client, self.root, os.path.basename(file_name))
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
 
-def configure(zk, client, instance_name):
+def configure(zk, client, root, instance_name):
     """Configures and starts the instance based on instance cached event.
 
     :param ``str`` instance_name:
@@ -88,7 +87,7 @@ def configure(zk, client, instance_name):
         return
     time.sleep(3)
     event_file = os.path.join(
-        os.path.join('C:/tmp', CACHE_DIR),
+        os.path.join(root, CACHE_DIR),
         instance_name
     )
 
@@ -100,7 +99,7 @@ def configure(zk, client, instance_name):
 
     if docker_container in client.containers.list(all):
         post(
-            os.path.join('C:/tmp', APP_EVENTS_DIR),
+            os.path.join(root, APP_EVENTS_DIR),
             ConfiguredTraceEvent(
                 instanceid=instance_name,
                 uniqueid=docker_container.id
@@ -116,11 +115,11 @@ def configure(zk, client, instance_name):
     except docker.errors.APIError:
         canstarted = False
     if canstarted:
-        manifest_file = os.path.join(os.path.join('C:/tmp', RUNNING_DIR), instance_name)
+        manifest_file = os.path.join(os.path.join(root, RUNNING_DIR), instance_name)
         manifest_data['container_id'] = docker_container.id
         #manifest = {'container_id':docker_container.id}
         if not os.path.exists(manifest_file):
-            with tempfile.NamedTemporaryFile(dir=os.path.join('C:/tmp', RUNNING_DIR),
+            with tempfile.NamedTemporaryFile(dir=os.path.join(root, RUNNING_DIR),
                                             prefix='.%s-' % instance_name,
                                             delete=False,
                                             mode='w') as temp_manifest:
@@ -129,7 +128,7 @@ def configure(zk, client, instance_name):
         logging.info('Created running manifest: %s', manifest_file)
 
         post(
-            os.path.join('C:/tmp', APP_EVENTS_DIR),
+            os.path.join(root, APP_EVENTS_DIR),
             ServiceRunningTraceEvent(
                 instanceid=instance_name,
                 uniqueid=docker_container.id,

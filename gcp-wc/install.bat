@@ -1,5 +1,6 @@
 @echo off
 
+pip install -r requirements.txt
 python .\appcfgmgr\appcfgMgrService.py install
 python .\appevents\appeventService.py install
 python .\cleanup\cleanupService.py install

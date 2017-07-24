@@ -15,7 +15,7 @@ import win32service
 import win32event
 
 #logging
-logging.basicConfig(filename = os.path.join("C:/tmp/log", 'updateResourcesSVC.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join(os.path.join(os.getenv("workDirectory"),'log'), 'updateResourcesSVC.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -36,7 +36,7 @@ class UpdateResourcesSvc (win32serviceutil.ServiceFramework):
     def __init__(self,args):
         win32serviceutil.ServiceFramework.__init__(self,args)
         self.hWaitStop = win32event.CreateEvent(None,0,0,None)
-        self.root = 'C:/tmp'
+        self.root = os.getenv("workDirectory")
         socket.setdefaulttimeout(60)
 
     def SvcStop(self):
@@ -44,7 +44,7 @@ class UpdateResourcesSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = '192.168.1.119:2181'
+        master_hosts = os.getenv("zookeeper")
         zk = KazooClient(hosts = master_hosts)
         zk.start()
         node_data = zk.get(path.server('node'))
@@ -62,7 +62,7 @@ class UpdateResourcesSvc (win32serviceutil.ServiceFramework):
             if zk.exists(path.server_presence(_HOSTNAME)):
                 zk.set(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'))
                 logging.info("Update resources infomation %s", _HOSTNAME)
-            if win32event.WaitForSingleObject(self.hWaitStop, 60000) == win32event.WAIT_OBJECT_0:
+            if win32event.WaitForSingleObject(self.hWaitStop, int(os.getenv("updateResourcesInterval"))) == win32event.WAIT_OBJECT_0:
                 break
 
 def monitorResources(interval=1.0):
