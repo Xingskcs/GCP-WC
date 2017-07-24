@@ -66,18 +66,6 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
                 if not zk.exists(path.server(_HOSTNAME)):
                     zk.create(path.server(_HOSTNAME), desktop_data.encode('utf-8'))
                     logging.info("Create servers node: %s", _HOSTNAME)
-                # if zk.exists(path.blackedout_server(_HOSTNAME)):
-                #     running_links = glob.glob(
-                #         os.path.join(os.path.join(self.root, RUNNING_DIR), '*')
-                #     )
-                #     for file_name in set(running_links):
-                #         with open(os.path.join(file_name)) as f:
-                #             manifest_data = yaml.load(stream=f)
-                #         try:
-                #             if client.containers.get(manifest_data['container_id']).status == 'running':
-                #                 client.containers.get(manifest_data['container_id']).kill()
-                #         except:
-                #             pass
                 elif not zk.exists(path.server_presence(_HOSTNAME)):
                     zk.create(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'), ephemeral=True)
                     logging.info("Create server.presence node: %s", _HOSTNAME)

@@ -69,26 +69,9 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
             running_links = glob.glob(
                 os.path.join(os.path.join(self.root, RUNNING_DIR), '*')
             )
-            logging.info(cached_files)
-            logging.info(running_links)
-            logging.info(11111111111111111111111111111111)
             for file_name in set(cached_files) - set(running_links):
                 if not os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), os.path.basename(file_name))):
                     configure(zk, client, os.path.basename(file_name))
-
-            # logging.info(2222222222222222222222222222222222222)
-            # for file_name in set(running_links) - set(cached_files):
-            #     logging.info('1111111111111111'+str(file_name))
-            #     with open(file_name) as f:
-            #         manifest_data = yaml.load(stream=f)
-            #         try:
-            #             logging.info(333333333333333333333333333333333333333333333333333333333333)
-            #             logging.info(manifest_data['container_id'])
-            #             if client.containers.get(manifest_data['container_id']).status == 'running':
-            #                 logging.info(44444444444444444444444444444444444444444444444444444444444444)
-            #                 client.containers.get(manifest_data['container_id']).kill()
-            #         except:
-            #             pass
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
 
