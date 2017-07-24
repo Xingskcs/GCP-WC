@@ -14,6 +14,7 @@ import os
 import glob
 import yaml
 import kazoo
+import docker
 import tempfile
 import socket
 import collections
@@ -35,6 +36,7 @@ logging.getLogger('').addHandler(console)
 
 _SEEN_FILE = '.seen'
 CACHE_DIR = 'cache'
+RUNNING_DIR = 'running'
 
 PLACEMENT = '/placement'
 SERVER_PRESENCE = '/server.presence'
@@ -115,8 +117,18 @@ def synchronize(zk, expected, root):
 
     # If app is extra, remove the entry from the cache
     for app in extra:
+        if os.path.exists(os.path.join(os.path.join(root, RUNNING_DIR), app)):
+            with open(os.path.join(os.path.join(root, RUNNING_DIR), app)) as f:
+                manifest_data = yaml.load(stream=f)
+            try:
+                client = docker.from_env()
+                if client.containers.get(manifest_data['container_id']).status == 'running':
+                    client.containers.get(manifest_data['container_id']).kill()
+            except:
+                pass
         manifest = os.path.join(os.path.join(root, CACHE_DIR), app)
-        os.unlink(manifest)
+        if os.path.exists(manifest):
+            os.unlink(manifest)
         logging.info('Deleted cache manifest: %s', manifest)
 
     # If app is missing, fetch its manifest in the cache

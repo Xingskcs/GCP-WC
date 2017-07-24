@@ -81,6 +81,7 @@ class StateMonitorSvc (win32serviceutil.ServiceFramework):
                 for manifest in glob.glob(os.path.join(os.path.join(self.root, CLEANUP_DIR), '*'))
             }
             for app in running_apps-cleanup_apps:
+                logging.info('11111111111111111111'+str(app))
                 with open(os.path.join(os.path.join(self.root, RUNNING_DIR), app)) as f:
                     manifest_data = yaml.load(stream=f)
                 running_containers[manifest_data['container_id']] = app
@@ -95,6 +96,7 @@ class StateMonitorSvc (win32serviceutil.ServiceFramework):
 
             killed_containers = set()
             for killed_container in client.containers.list(all, filters={"exited": "137"}):
+                logging.info('1111111111111111111144444444444444444444444444444444444444')
                 killed_containers.add(killed_container.id)
 
             aborted_containers = {}
@@ -105,9 +107,11 @@ class StateMonitorSvc (win32serviceutil.ServiceFramework):
 
             for container_id in running_containers:
                 if container_id in exited_containers:
+                    logging.info(222222222222222222222222222222222222222222222)
                     instance_name = running_containers.get(container_id)
-                    if (os.path.exists(os.path.join(os.path.join(self.root, CACHE_DIR), instance_name))):
-                        with open(os.path.join(os.path.join(self.root, CACHE_DIR), instance_name)) as f:
+                    logging.info(instance_name)
+                    if (os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name))):
+                        with open(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name)) as f:
                             manifest_data = yaml.load(stream=f)
 
                         # if container is normally finished
@@ -142,6 +146,7 @@ class StateMonitorSvc (win32serviceutil.ServiceFramework):
                         # if container is killed
                         elif container_id in killed_containers:
                             # create exited node
+                            logging.info(333333333333333333333333333333333333333333333333333333333)
                             logging.info("exited: %s", running_containers.get(container_id))
                             post(
                                 os.path.join(self.root, APP_EVENTS_DIR),

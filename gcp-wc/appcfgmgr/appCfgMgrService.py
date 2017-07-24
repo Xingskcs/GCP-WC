@@ -61,6 +61,7 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
         master_hosts = '192.168.1.119:2181'
         zk = KazooClient(hosts=master_hosts)
         zk.start()
+        client = docker.from_env()
         while True:
             cached_files = glob.glob(
                 os.path.join(os.path.join(self.root, CACHE_DIR), '*')
@@ -68,21 +69,30 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
             running_links = glob.glob(
                 os.path.join(os.path.join(self.root, RUNNING_DIR), '*')
             )
+            logging.info(cached_files)
+            logging.info(running_links)
+            logging.info(11111111111111111111111111111111)
             for file_name in set(cached_files) - set(running_links):
                 if not os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), os.path.basename(file_name))):
-                    configure(zk, os.path.basename(file_name))
+                    configure(zk, client, os.path.basename(file_name))
 
+            # logging.info(2222222222222222222222222222222222222)
             # for file_name in set(running_links) - set(cached_files):
-            #     instanceName = os.path.basename(file_name)
-            #     if os.path.exists(
-            #             os.path.join(os.path.join(self.root, RUNNING_DIR), instanceName)):
-            #         shutil.copy(
-            #             os.path.join(os.path.join(self.root, RUNNING_DIR), instanceName),
-            #             os.path.join(self.root, CLEANUP_DIR))
+            #     logging.info('1111111111111111'+str(file_name))
+            #     with open(file_name) as f:
+            #         manifest_data = yaml.load(stream=f)
+            #         try:
+            #             logging.info(333333333333333333333333333333333333333333333333333333333333)
+            #             logging.info(manifest_data['container_id'])
+            #             if client.containers.get(manifest_data['container_id']).status == 'running':
+            #                 logging.info(44444444444444444444444444444444444444444444444444444444444444)
+            #                 client.containers.get(manifest_data['container_id']).kill()
+            #         except:
+            #             pass
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
 
-def configure(zk, instance_name):
+def configure(zk, client, instance_name):
     """Configures and starts the instance based on instance cached event.
 
     :param ``str`` instance_name:
@@ -102,7 +112,6 @@ def configure(zk, instance_name):
     logging.info("configuring %s", instance_name)
     with open(event_file) as f:
         manifest_data = yaml.load(stream=f)
-    client = docker.from_env()
     docker_container = client.containers.create(image = 'resource',
                                                 command = manifest_data['services'][0]['command'])
 
@@ -125,13 +134,14 @@ def configure(zk, instance_name):
         canstarted = False
     if canstarted:
         manifest_file = os.path.join(os.path.join('C:/tmp', RUNNING_DIR), instance_name)
-        manifest = {'container_id':docker_container.id}
+        manifest_data['container_id'] = docker_container.id
+        #manifest = {'container_id':docker_container.id}
         if not os.path.exists(manifest_file):
             with tempfile.NamedTemporaryFile(dir=os.path.join('C:/tmp', RUNNING_DIR),
                                             prefix='.%s-' % instance_name,
                                             delete=False,
                                             mode='w') as temp_manifest:
-                yaml.dump(manifest, stream=temp_manifest)
+                yaml.dump(manifest_data, stream=temp_manifest)
             os.rename(temp_manifest.name, manifest_file)
         logging.info('Created running manifest: %s', manifest_file)
 
