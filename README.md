@@ -1,4 +1,4 @@
 # GCP-WC
 Windows containers management platform.
 
-Run startup.bat with administrator privileges.
+Run install.bat with administrator privileges.
