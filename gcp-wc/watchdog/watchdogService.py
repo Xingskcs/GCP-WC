@@ -239,6 +239,8 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
         services.append(state_monitor)
         update_resources = ServiceManager(_UPDATERESOURCES)
         services.append(update_resources)
+        screen_monitor = ServiceManager(_SCREENMONITOR)
+        services.append(screen_monitor)
 
         self._start(services)
         previous_state = zk.state
@@ -277,12 +279,15 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
     def _stop(self, services):
         for service in services:
             if service.status() == 'RUNNING':
-                service.stop()
+                if service.name == 'ScreenMonitorService':
+                    os.system('TASKKILL /F /FI "services eq ScreenMonitorService"')
+                else:
+                    service.stop()
 
     def _serviceStatus(self, services):
         for service in services:
             if service.status() == 'STOPPED':
-                logging.info('11111111111111'+str(service.name))
+                logging.info('failed service: '+str(service.name))
                 return False
         return True
 
