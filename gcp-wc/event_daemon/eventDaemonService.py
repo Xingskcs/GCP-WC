@@ -78,6 +78,9 @@ class EventDaemonSvc (win32serviceutil.ServiceFramework):
                     seen.clear()
                     cache_notify(self.root, False)
                 elif event is not None and event.type == 'DELETED':
+                    seen.set()
+                    apps = zk.get_children(path.placement(_HOSTNAME))
+                    synchronize(zk, apps, self.root)
                     logging.info('Presence node deleted.')
                     seen.clear()
                     cache_notify(self.root, False)
@@ -110,10 +113,10 @@ def synchronize(zk, expected, root):
     extra = current_set - expected_set
     missing = expected_set - current_set
 
-    # logging.info('expected : %s', ','.join(expected_set))
-    # logging.info('actual   : %s', ','.join(current_set))
-    # logging.info('extra    : %s', ','.join(extra))
-    # logging.info('missing  : %s', ','.join(missing))
+    logging.info('expected : %s', ','.join(expected_set))
+    logging.info('actual   : %s', ','.join(current_set))
+    logging.info('extra    : %s', ','.join(extra))
+    logging.info('missing  : %s', ','.join(missing))
 
     # If app is extra, remove the entry from the cache
     for app in extra:

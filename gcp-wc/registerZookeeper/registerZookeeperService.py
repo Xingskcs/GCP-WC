@@ -64,6 +64,9 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
                 if not zk.exists(path.server(_HOSTNAME)):
                     zk.create(path.server(_HOSTNAME), desktop_data.encode('utf-8'))
                     logging.info("Create servers node: %s", _HOSTNAME)
+                if zk.exists(path.blackedout_server(_HOSTNAME)):
+                    if zk.exists(path.server_presence(_HOSTNAME)):
+                        zk.delete(path.server_presence(_HOSTNAME))
                 elif not zk.exists(path.server_presence(_HOSTNAME)):
                     zk.create(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'), ephemeral=True)
                     logging.info("Create server.presence node: %s", _HOSTNAME)
