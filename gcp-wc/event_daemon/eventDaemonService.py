@@ -79,6 +79,8 @@ class EventDaemonSvc (win32serviceutil.ServiceFramework):
                     cache_notify(self.root, False)
                 elif event is not None and event.type == 'DELETED':
                     seen.set()
+					if not zk.exists(path.placement(_HOSTNAME)):
+						zk.create(path.placement(_HOSTNAME))
                     apps = zk.get_children(path.placement(_HOSTNAME))
                     synchronize(zk, apps, self.root)
                     logging.info('Presence node deleted.')
@@ -87,6 +89,8 @@ class EventDaemonSvc (win32serviceutil.ServiceFramework):
                 else:
                     # logging.info('Presence is up.')
                     seen.set()
+					if not zk.exists(path.placement(_HOSTNAME)):
+						zk.create(path.placement(_HOSTNAME))
                     apps = zk.get_children(path.placement(_HOSTNAME))
                     synchronize(zk, apps, self.root)
                 return True
