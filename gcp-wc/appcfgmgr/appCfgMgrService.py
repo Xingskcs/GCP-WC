@@ -94,7 +94,7 @@ def configure(zk, client, root, instance_name):
     logging.info("configuring %s", instance_name)
     with open(event_file) as f:
         manifest_data = yaml.load(stream=f)
-    docker_container = client.containers.create(image = 'resource',
+    docker_container = client.containers.create(image = 'python',
                                                 command = manifest_data['services'][0]['command'])
 
     if docker_container in client.containers.list(all):
