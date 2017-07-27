@@ -53,11 +53,14 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
         zk = KazooClient(hosts = master_hosts)
         zk.start()
         client = docker.from_env()
+        screen_state = "Unlock"
         while True:
-            f = open(os.path.join(self.root, screen_state_file), 'r')
-            screen_state = f.read()
+            if os.path.exists(os.path.join(self.root, screen_state_file)):
+                f = open(os.path.join(self.root, screen_state_file), 'r')
+                screen_state = f.read()
             #if screen_state == 'Lock':
             if True:
+                create_workDirectory(self.root)
                 node_data = zk.get(path.server('node'))
                 # For desktop, we add a 'windows' label, in order to schedule better later.
                 desktop_data = node_data[0].decode().replace('~', 'windows', 1)
@@ -77,6 +80,19 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
 
+def create_workDirectory(root):
+    if not os.path.exists(os.path.join(root, 'appevents')):
+        os.makedirs(os.path.join(root, 'appevents'))
+    if not os.path.exists(os.path.join(root, 'cache')):
+        os.makedirs(os.path.join(root, 'cache'))
+    if not os.path.exists(os.path.join(root, 'cleanup')):
+        os.makedirs(os.path.join(root, 'cleanup'))
+    if not os.path.exists(os.path.join(root, 'log')):
+        os.makedirs(os.path.join(root, 'log'))
+    if not os.path.exists(os.path.join(root, 'running')):
+        os.makedirs(os.path.join(root, 'running'))
+    if not os.path.exists(os.path.join(root, 'screen_state.txt')):
+        os.mknod(os.path.join(root, 'screen_state.txt'))
 def join_zookeeper_path(root, *child):
     """"Returns zookeeper path joined by slash."""
     return '/'.join((root,) + child)
