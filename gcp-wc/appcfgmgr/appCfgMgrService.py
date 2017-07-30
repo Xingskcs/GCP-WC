@@ -135,8 +135,9 @@ def configure(zk, client, root, instance_name):
                 service=manifest_data['services'][0]['name']
             )
         )
-        # app_data = zk.get(path_scheduled(instance_name))
-        # zk.create(path_running(instance_name), app_data.encode('utf-8'))
+        app_data = _HOSTNAME
+        if not zk.exists(path_running(instance_name)):
+            zk.create(path_running(instance_name), app_data.encode('utf-8'))
         logging.info("running %s", instance_name)
 
 def path_scheduled(instance_name):

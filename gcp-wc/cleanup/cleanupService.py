@@ -79,6 +79,8 @@ class CleanupSvc (win32serviceutil.ServiceFramework):
         logging.info("cleanup: %s", instance_name)
         if zk.exists(path.placement(_HOSTNAME + '/' + instance_name)):
             zk.delete(path.placement(_HOSTNAME + '/' + instance_name))
+        if zk.exists(path_running(instance_name)):
+            zk.delete(path_running(instance_name))
         rm_safe(os.path.join(os.path.join(self.root, CACHE_DIR), instance_name))
         with open(os.path.join(os.path.join(self.root, CLEANUP_DIR), instance_name)) as f:
             manifest_data = yaml.load(stream=f)
@@ -97,6 +99,9 @@ def rm_safe(path):
             pass
         else:
             raise
+
+def path_running(instance_name):
+    return RUNNING +'/'+instance_name
 
 def join_zookeeper_path(root, *child):
     """"Returns zookeeper path joined by slash."""

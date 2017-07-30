@@ -12,6 +12,7 @@ Applications that are scheduled to run on the desktop are mirrored in the
 """
 import os
 import glob
+import time
 import yaml
 import kazoo
 import docker
@@ -37,6 +38,7 @@ logging.getLogger('').addHandler(console)
 _SEEN_FILE = '.seen'
 CACHE_DIR = 'cache'
 RUNNING_DIR = 'running'
+CLEANUP_DIR = 'cleanup'
 
 PLACEMENT = '/placement'
 SERVER_PRESENCE = '/server.presence'
@@ -127,16 +129,24 @@ def synchronize(zk, expected, root):
         if os.path.exists(os.path.join(os.path.join(root, RUNNING_DIR), app)):
             with open(os.path.join(os.path.join(root, RUNNING_DIR), app)) as f:
                 manifest_data = yaml.load(stream=f)
+            os.unlink(os.path.join(os.path.join(root, CACHE_DIR), app))
+            os.unlink(os.path.join(os.path.join(root, RUNNING_DIR), app))
+            time.sleep(2)
             try:
                 client = docker.from_env()
                 if client.containers.get(manifest_data['container_id']).status == 'running':
                     client.containers.get(manifest_data['container_id']).kill()
             except:
                 pass
-        manifest = os.path.join(os.path.join(root, CACHE_DIR), app)
-        if os.path.exists(manifest):
-            os.unlink(manifest)
-        logging.info('Deleted cache manifest: %s', manifest)
+            manifest_file = os.path.join(os.path.join(root, CLEANUP_DIR), app)
+            if not os.path.exists(manifest_file):
+                with tempfile.NamedTemporaryFile(dir=os.path.join(root, CLEANUP_DIR),
+                                                 prefix='.%s-' % app,
+                                                 delete=False,
+                                                 mode='w') as temp_manifest:
+                    yaml.dump(manifest_data, stream=temp_manifest)
+                os.rename(temp_manifest.name, manifest_file)
+        logging.info('Deleted cache manifest: %s', app)
 
     # If app is missing, fetch its manifest in the cache
     for app in missing:
