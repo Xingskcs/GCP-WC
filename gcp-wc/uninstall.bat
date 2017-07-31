@@ -1,3 +1,6 @@
+@call :output>uninstall.log
+exit
+:output
 @echo off
 
 python .\watchdog\watchdogService.py stop

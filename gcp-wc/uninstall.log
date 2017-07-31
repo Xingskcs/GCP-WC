@@ -1,0 +1,36 @@
+Stopping service WatchdogService
+Error stopping service: 服务尚未启动。 (1062)
+Stopping service AppCfgMgrService
+Error stopping service: 服务尚未启动。 (1062)
+Stopping service AppeventService
+Error stopping service: 服务尚未启动。 (1062)
+Stopping service CleanupService
+Error stopping service: 服务尚未启动。 (1062)
+Stopping service EventDaemonService
+Error stopping service: 服务尚未启动。 (1062)
+Stopping service RegisterZookeeperService
+Error stopping service: 服务尚未启动。 (1062)
+Stopping service StateMonitorService
+Error stopping service: 服务尚未启动。 (1062)
+Stopping service UpdateResourcesService
+Error stopping service: 服务尚未启动。 (1062)
+
+信息: 没有运行的带有指定标准的任务。
+Removing service WatchdogService
+Service removed
+Removing service AppCfgMgrService
+Service removed
+Removing service AppeventService
+Service removed
+Removing service CleanupService
+Service removed
+Removing service EventDaemonService
+Service removed
+Removing service ScreenMonitorService
+Service removed
+Removing service RegisterZookeeperService
+Service removed
+Removing service StateMonitorService
+Service removed
+Removing service UpdateResourcesService
+Service removed

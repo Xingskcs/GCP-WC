@@ -1,3 +1,6 @@
+@call :output>install.log
+exit
+:output
 @echo off
 
 pip install -r requirements.txt
