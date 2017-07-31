@@ -1,3 +1,4 @@
+Already up-to-date.
 Requirement already satisfied: chardet==3.0.4 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 1))
 Requirement already satisfied: docker==2.4.2 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 2))
 Requirement already satisfied: docker-pycreds==0.2.1 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 3))

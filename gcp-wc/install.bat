@@ -3,6 +3,8 @@ exit
 :output
 @echo off
 
+git pull origin master
+
 pip install -r requirements.txt
 python .\appcfgmgr\appcfgMgrService.py install
 python .\appevents\appeventService.py install

@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cd19147-6940-4d19-9cdf-a0bbf63e9a89" name="Default" comment="appevents;killed events;aborted events">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gcp-wc/install.bat" afterPath="$PROJECT_DIR$/gcp-wc/install.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gcp-wc/uninstall.bat" afterPath="$PROJECT_DIR$/gcp-wc/uninstall.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gcp-wc/install.log" afterPath="$PROJECT_DIR$/gcp-wc/install.log" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -76,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="install.bat" pinned="false" current-in-tab="false">
+      <file leaf-file-name="install.bat" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gcp-wc/install.bat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+            <state relative-caret-position="150">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -99,14 +98,14 @@
       <file leaf-file-name="install.log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gcp-wc/install.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="800">
-              <caret line="32" column="32" lean-forward="true" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+            <state relative-caret-position="674">
+              <caret line="33" column="32" lean-forward="true" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="uninstall.log" pinned="false" current-in-tab="true">
+      <file leaf-file-name="uninstall.log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.log">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="388">
@@ -218,9 +217,9 @@
         <option value="$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/install.log" />
-        <option value="$PROJECT_DIR$/gcp-wc/install.bat" />
         <option value="$PROJECT_DIR$/gcp-wc/uninstall.bat" />
         <option value="$PROJECT_DIR$/gcp-wc/uninstall.log" />
+        <option value="$PROJECT_DIR$/gcp-wc/install.bat" />
       </list>
     </option>
   </component>
@@ -664,7 +663,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="7" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26344743" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -916,14 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/install.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -932,18 +923,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/install.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="32" column="32" lean-forward="true" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
           <caret line="23" column="15" lean-forward="true" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/install.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="674">
+          <caret line="33" column="32" lean-forward="true" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/install.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
