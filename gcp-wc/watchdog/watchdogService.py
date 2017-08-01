@@ -297,7 +297,8 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
         for service in services:
             if service.status() == 'RUNNING':
                 if service.name == 'ScreenMonitorService':
-                    os.system('TASKKILL /F /FI "services eq ScreenMonitorService"')
+                    #os.system('TASKKILL /F /FI "services eq ScreenMonitorService"')
+                    pass
                 else:
                     service.stop()
 
