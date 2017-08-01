@@ -224,6 +224,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
                 except:
                     pass
             else:
+                time.sleep(5)
                 self._stop(services)
                 if zk.exists(server_presence()):
                     zk.delete(server_presence())
