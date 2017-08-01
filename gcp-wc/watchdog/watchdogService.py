@@ -205,8 +205,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
             if screen_state == 'Lock':
                 try:
                     if zk.state == 'CONNECTED':
-                        if previous_state != 'CONNECTED':
-                            self._start(services)
+                        self._start(services)
                         if self._serviceStatus(services):
                             # zk.ensure_path(server_presence())
                             pass
