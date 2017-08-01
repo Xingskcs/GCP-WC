@@ -230,6 +230,13 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
                 except:
                     pass
             else:
+                apps = zk.get_children('/placement'+'/'+_HOSTNAME)
+                for app in apps:
+                    if zk.exists('/placement'+'/'+_HOSTNAME+'/'+app):
+                        try:
+                            zk.delete('/placement'+'/'+_HOSTNAME+'/'+app)
+                        except:
+                            pass
                 for i in range(2):
                     if zk.exists(server_presence()):
                         zk.delete(server_presence())
