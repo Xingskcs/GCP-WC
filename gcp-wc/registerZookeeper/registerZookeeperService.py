@@ -78,7 +78,7 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
                 # if zk.exists(path.server_presence(_HOSTNAME)):
                 #     zk.delete(path.server_presence(_HOSTNAME))
                 #     logging.info("Delete server.presence node: %s", _HOSTNAME)
-            if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+            if win32event.WaitForSingleObject(self.hWaitStop, 100) == win32event.WAIT_OBJECT_0:
                 break
 
 def create_workDirectory(root):
