@@ -145,6 +145,7 @@ class ServiceManager(object):
         return False
 
 SERVER_PRESENCE = '/server.presence'
+PLACEMENT = '/placement'
 
 _HOSTNAME = socket.gethostname()
 
@@ -224,10 +225,14 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
                 except:
                     pass
             else:
-                if zk.exists(server_presence()):
-                    zk.delete(server_presence())
+                apps = zk.get_children(server_placement(_HOSTNAME))
+                for app in set(apps):
+                    if zk.exists(server_placement(_HOSTNAME)+'/'+app):
+                        zk.delete(server_placement(_HOSTNAME)+'/'+app)
                 time.sleep(5)
                 self._stop(services)
+                if zk.exists(server_presence()):
+                    zk.delete(server_presence())
                 try:
                     zk.start()
                 except:
@@ -312,6 +317,8 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
 def server_presence():
     return SERVER_PRESENCE+'/'+_HOSTNAME
 
+def server_placement():
+    return PLACEMENT+'/'+_HOSTNAME
 
 
 if __name__ == '__main__':

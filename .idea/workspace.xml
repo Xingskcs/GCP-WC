@@ -40,11 +40,21 @@
       <file leaf-file-name="watchdogService.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="229" column="36" lean-forward="false" selection-start-line="229" selection-start-column="36" selection-end-line="229" selection-end-column="36" />
+            <state relative-caret-position="84">
+              <caret line="230" column="69" lean-forward="false" selection-start-line="230" selection-start-column="69" selection-end-line="230" selection-end-column="69" />
               <folding>
-                <element signature="e#8746#8767#0" expanded="false" />
+                <element signature="e#9019#9040#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eventDaemonService.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="113" column="32" lean-forward="true" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -808,7 +818,6 @@
     <entry file="file://$PROJECT_DIR$/gcp-wc/appevents/appeventService.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/updateResources/updateResourcesService.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/configure.json" />
-    <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/clean.log" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.bat" />
@@ -867,12 +876,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="113" column="32" lean-forward="true" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="229" column="36" lean-forward="false" selection-start-line="229" selection-start-column="36" selection-end-line="229" selection-end-column="36" />
+        <state relative-caret-position="84">
+          <caret line="230" column="69" lean-forward="false" selection-start-line="230" selection-start-column="69" selection-end-line="230" selection-end-column="69" />
           <folding>
-            <element signature="e#8746#8767#0" expanded="false" />
+            <element signature="e#9019#9040#0" expanded="false" />
           </folding>
         </state>
       </provider>
