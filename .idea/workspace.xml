@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5cd19147-6940-4d19-9cdf-a0bbf63e9a89" name="Default" comment="appevents;killed events;aborted events" />
+    <list default="true" id="5cd19147-6940-4d19-9cdf-a0bbf63e9a89" name="Default" comment="appevents;killed events;aborted events">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py" afterPath="$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py" afterPath="$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +19,7 @@
       <file leaf-file-name="stateMonitorService.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gcp-wc/statemonitor/stateMonitorService.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3700">
+            <state relative-caret-position="865">
               <caret line="165" column="34" lean-forward="false" selection-start-line="165" selection-start-column="28" selection-end-line="167" selection-end-column="81" />
               <folding>
                 <element signature="e#72#81#0" expanded="true" />
@@ -31,81 +35,28 @@
                 <element signature="e#20232#21420#0" expanded="false" />
                 <element signature="e#21473#22935#0" expanded="false" />
                 <element signature="e#22979#23352#0" expanded="false" />
-                <marker date="1500904187432" expanded="true" signature="5952:7471" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="appCfgMgrService.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3250">
-              <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="146" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cleanupService.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="watchdogService.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="watchdogService.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1050">
-              <caret line="163" column="33" lean-forward="false" selection-start-line="163" selection-start-column="18" selection-end-line="163" selection-end-column="33" />
+            <state relative-caret-position="829">
+              <caret line="238" column="4" lean-forward="false" selection-start-line="238" selection-start-column="4" selection-end-line="238" selection-end-column="4" />
               <folding>
-                <element signature="e#97#106#0" expanded="true" />
-                <element signature="e#698#5402#0" expanded="false" />
-                <element signature="e#6364#6385#0" expanded="false" />
+                <element signature="e#8778#8799#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="install.bat" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gcp-wc/install.bat">
+      <file leaf-file-name="monitorScreenService.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/monitorScreen/monitorScreenService.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="uninstall.bat" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.bat">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="install.log" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gcp-wc/install.log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="674">
-              <caret line="33" column="32" lean-forward="true" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="uninstall.log" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="23" column="15" lean-forward="true" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+            <state relative-caret-position="-978">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -114,21 +65,19 @@
       <file leaf-file-name="registerZookeeperService.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1625">
-              <caret line="75" column="17" lean-forward="false" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
+            <state relative-caret-position="378">
+              <caret line="61" column="21" lean-forward="true" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="eventDaemonService.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py">
+      <file leaf-file-name="uninstall.log" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3200">
-              <caret line="143" column="4" lean-forward="false" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="4" />
-              <folding>
-                <element signature="e#342#351#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="414">
+              <caret line="23" column="15" lean-forward="false" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -205,10 +154,8 @@
         <option value="$PROJECT_DIR$/gcp-wc/setEnv.bat" />
         <option value="$PROJECT_DIR$/gcp-wc/appevents/appeventService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/monitorScreen/monitorScreenService.py" />
-        <option value="$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/updateResources/updateResourcesService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/statemonitor/stateMonitorService.py" />
-        <option value="$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py" />
         <option value="$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py" />
@@ -216,6 +163,8 @@
         <option value="$PROJECT_DIR$/gcp-wc/uninstall.bat" />
         <option value="$PROJECT_DIR$/gcp-wc/uninstall.log" />
         <option value="$PROJECT_DIR$/gcp-wc/install.bat" />
+        <option value="$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py" />
+        <option value="$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py" />
       </list>
     </option>
   </component>
@@ -226,10 +175,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="x" value="75" />
+    <option name="y" value="34" />
+    <option name="width" value="1855" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -361,6 +310,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="monitorScreen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GCP-WC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gcp-wc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="event_daemon" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -426,7 +393,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python/treadmill" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
@@ -544,6 +511,70 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GCP-WC" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GCP-WC" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GCP-WC" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -574,6 +605,16 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <module name="GCP-WC" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -659,18 +700,19 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="75" y="34" width="1855" height="1056" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26344743" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2630728" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2309417" sideWeight="0.51161367" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2309417" sideWeight="0.4883863" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2309417" sideWeight="0.4883863" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -678,7 +720,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -724,13 +765,7 @@
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/TtestService.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/__init__.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/HaService.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/collections/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/collections/__init__.py" />
     <entry file="file://$PROJECT_DIR$/screenMonitor.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/screen_state.txt" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/stateMonitor.py" />
@@ -744,13 +779,7 @@
     <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/appcfgmgr.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/statemonitor/state_monitor.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanup.py" />
-    <entry file="file://$USER_HOME$/.PyCharmCE2017.1/system/python_stubs/-201147080/errno.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2017.1/system/python_stubs/-201147080/errno.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/fs.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/__init__.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/dirwatch/windows_dirwatch.py" />
@@ -758,13 +787,7 @@
     <entry file="file://$PROJECT_DIR$/gcp-wc/zkutils.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/appevents/appevents.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/zknamespace.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/kazoo/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="106" column="8" lean-forward="false" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/kazoo/client.py" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/stop" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/start" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/test.bat" />
@@ -790,72 +813,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/setEnv.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/setWindowsEnv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
-          <caret line="27" column="26" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/appevents/appeventService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="40" column="46" lean-forward="false" selection-start-line="40" selection-start-column="46" selection-end-line="40" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/monitorScreen/monitorScreenService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1675">
-          <caret line="76" column="46" lean-forward="false" selection-start-line="76" selection-start-column="46" selection-end-line="76" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/updateResources/updateResourcesService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="64" column="104" lean-forward="false" selection-start-line="64" selection-start-column="104" selection-end-line="64" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/configure.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1625">
-          <caret line="75" column="17" lean-forward="false" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="163" column="33" lean-forward="false" selection-start-line="163" selection-start-column="18" selection-end-line="163" selection-end-column="33" />
-          <folding>
-            <element signature="e#97#106#0" expanded="true" />
-            <element signature="e#698#5402#0" expanded="false" />
-            <element signature="e#6364#6385#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/gcp-wc/setEnv.bat" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/setWindowsEnv.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/appevents/appeventService.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/updateResources/updateResourcesService.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/configure.json" />
     <entry file="file://$PROJECT_DIR$/gcp-wc/statemonitor/stateMonitorService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3700">
+        <state relative-caret-position="865">
           <caret line="165" column="34" lean-forward="false" selection-start-line="165" selection-start-column="28" selection-end-line="167" selection-end-column="81" />
           <folding>
             <element signature="e#72#81#0" expanded="true" />
@@ -871,74 +836,48 @@
             <element signature="e#20232#21420#0" expanded="false" />
             <element signature="e#21473#22935#0" expanded="false" />
             <element signature="e#22979#23352#0" expanded="false" />
-            <marker date="1500904187432" expanded="true" signature="5952:7471" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py">
+    <entry file="file://$PROJECT_DIR$/gcp-wc/event_daemon/eventDaemonService.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/clean.log" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.bat" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3200">
-          <caret line="143" column="4" lean-forward="false" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="4" />
-          <folding>
-            <element signature="e#342#351#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/appcfgmgr/appCfgMgrService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3250">
-          <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="146" selection-end-column="37" />
+        <state relative-caret-position="414">
+          <caret line="23" column="15" lean-forward="false" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/cleanup/cleanupService.py">
+    <entry file="file://$PROJECT_DIR$/gcp-wc/install.log" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/install.bat" />
+    <entry file="file://$PROJECT_DIR$/gcp-wc/monitorScreen/monitorScreenService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/clean.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-978">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.bat">
+    <entry file="file://$PROJECT_DIR$/gcp-wc/registerZookeeper/registerZookeeperService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="378">
+          <caret line="61" column="21" lean-forward="true" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/uninstall.log">
+    <entry file="file://$PROJECT_DIR$/gcp-wc/watchdog/watchdogService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="23" column="15" lean-forward="true" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/install.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="33" column="32" lean-forward="true" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gcp-wc/install.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="829">
+          <caret line="238" column="4" lean-forward="false" selection-start-line="238" selection-start-column="4" selection-end-line="238" selection-end-column="4" />
+          <folding>
+            <element signature="e#8778#8799#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

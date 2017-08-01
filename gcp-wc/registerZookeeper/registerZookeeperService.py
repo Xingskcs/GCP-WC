@@ -58,8 +58,8 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
             if os.path.exists(os.path.join(self.root, screen_state_file)):
                 f = open(os.path.join(self.root, screen_state_file), 'r')
                 screen_state = f.read()
-            #if screen_state == 'Lock':
-            if True:
+            if screen_state == 'Lock':
+            #if True:
                 create_workDirectory(self.root)
                 node_data = zk.get(path.server('node'))
                 # For desktop, we add a 'windows' label, in order to schedule better later.

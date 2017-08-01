@@ -174,49 +174,6 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
         self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
         win32event.SetEvent(self.hWaitStop)
 
-    # def SvcDoRun(self):
-    #     master_hosts = '192.168.1.119:2181'
-    #     zk = KazooClient(hosts=master_hosts)
-    #     zk.start()
-    #
-    #     services = []
-    #     app_cfg = ServiceManager(_APPCFGMGR)
-    #     services.append(app_cfg)
-    #     app_events = ServiceManager(_APPEVENTS)
-    #     services.append(app_events)
-    #     clean_up = ServiceManager(_CLEANUP)
-    #     services.append(clean_up)
-    #     event_daemon = ServiceManager(_EVENTDAEMON)
-    #     services.append(event_daemon)
-    #     screen_monitor = ServiceManager(_SCREENMONITOR)
-    #     register_zk = ServiceManager(_REGISTERZOOKEEPER)
-    #     services.append(register_zk)
-    #     state_monitor = ServiceManager(_STATEMONITOR)
-    #     services.append(state_monitor)
-    #     update_resources = ServiceManager(_UPDATERESOURCES)
-    #     services.append(update_resources)
-    #
-    #     previous_state = ''
-    #
-    #     while True:
-    #         f = open(os.path.join(self.root, screen_state_file), 'r')
-    #         screen_state = f.read()
-    #         if previous_state != screen_state:
-    #             if screen_state == 'Lock':
-    #                 #start all services
-    #                 self._start(services)
-    #                 time.sleep(5)
-    #                 if not self._serviceStatus(services):
-    #                     self._stop(services)
-    #                     if zk.exists(server_presence(_HOSTNAME)):
-    #                         zk.delete(server_presence(_HOSTNAME))
-    #             elif screen_state == 'Unlock':
-    #                 #stop all services
-    #                 self._stop(services)
-    #                 if zk.exists(server_presence(_HOSTNAME)):
-    #                     zk.delete(server_presence(_HOSTNAME))
-    #         if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
-    #             break
     def SvcDoRun(self):
         master_hosts = os.getenv("zookeeper")
         zk = KazooClient(hosts=master_hosts)
@@ -243,30 +200,92 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
         self._start(services)
         previous_state = zk.state
         while True:
-            try:
-                if zk.state == 'CONNECTED':
-                    if previous_state == 'SUSPENDED':
-                        self._start(services)
-                    if self._serviceStatus(services):
-                        #zk.ensure_path(server_presence())
-                        pass
+            f = open(os.path.join(self.root, screen_state_file), 'r')
+            screen_state = f.read()
+            if screen_state == 'Lock':
+                try:
+                    if zk.state == 'CONNECTED':
+                        if previous_state != 'CONNECTED':
+                            self._start(services)
+                        if self._serviceStatus(services):
+                            # zk.ensure_path(server_presence())
+                            pass
+                        else:
+                            self._stop(services)
+                            if zk.exists(server_presence()):
+                                zk.delete(server_presence())
                     else:
                         self._stop(services)
                         if zk.exists(server_presence()):
                             zk.delete(server_presence())
-                else:
-                    self._stop(services)
-                    if zk.exists(server_presence()):
-                        zk.delete(server_presence())
-                    try:
-                        zk.start()
-                    except:
-                        pass
-            except:
-                pass
+                        try:
+                            zk.start()
+                        except:
+                            pass
+                except:
+                    pass
+            else:
+                self._stop(services)
+                if zk.exists(server_presence()):
+                    zk.delete(server_presence())
+                try:
+                    zk.start()
+                except:
+                    pass
+
             previous_state = zk.state
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
+    # def SvcDoRun(self):
+    #     master_hosts = os.getenv("zookeeper")
+    #     zk = KazooClient(hosts=master_hosts)
+    #     zk.start()
+    #
+    #     services = []
+    #     app_cfg = ServiceManager(_APPCFGMGR)
+    #     services.append(app_cfg)
+    #     app_events = ServiceManager(_APPEVENTS)
+    #     services.append(app_events)
+    #     clean_up = ServiceManager(_CLEANUP)
+    #     services.append(clean_up)
+    #     event_daemon = ServiceManager(_EVENTDAEMON)
+    #     services.append(event_daemon)
+    #     register_zk = ServiceManager(_REGISTERZOOKEEPER)
+    #     services.append(register_zk)
+    #     state_monitor = ServiceManager(_STATEMONITOR)
+    #     services.append(state_monitor)
+    #     update_resources = ServiceManager(_UPDATERESOURCES)
+    #     services.append(update_resources)
+    #     screen_monitor = ServiceManager(_SCREENMONITOR)
+    #     services.append(screen_monitor)
+    #
+    #     self._start(services)
+    #     previous_state = zk.state
+    #     while True:
+    #         try:
+    #             if zk.state == 'CONNECTED':
+    #                 if previous_state == 'SUSPENDED':
+    #                     self._start(services)
+    #                 if self._serviceStatus(services):
+    #                     #zk.ensure_path(server_presence())
+    #                     pass
+    #                 else:
+    #                     self._stop(services)
+    #                     if zk.exists(server_presence()):
+    #                         zk.delete(server_presence())
+    #             else:
+    #                 self._stop(services)
+    #                 if zk.exists(server_presence()):
+    #                     zk.delete(server_presence())
+    #                 try:
+    #                     zk.start()
+    #                 except:
+    #                     pass
+    #         except:
+    #             pass
+    #         previous_state = zk.state
+    #         if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+    #             break
 
 
     def _start(self, services):
