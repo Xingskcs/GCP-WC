@@ -4,6 +4,7 @@ Watch the state of service and the state of connection with zookeeper.
 """
 import os
 import time
+import glob
 import socket
 import datetime
 import logging.config
@@ -159,6 +160,10 @@ _REGISTERZOOKEEPER = 'RegisterZookeeperService'
 _STATEMONITOR = 'StateMonitorService'
 _UPDATERESOURCES = 'UpdateResourcesService'
 
+RUNNING_DIR = 'running'
+CLEANUP_DIR = 'cleanup'
+CACHE_DIR = 'cache'
+
 class WatchdogSvc (win32serviceutil.ServiceFramework):
     """Register Zookeeper Service"""
 
@@ -225,11 +230,41 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
                 except:
                     pass
             else:
-                apps = zk.get_children(server_placement(_HOSTNAME))
-                for app in set(apps):
-                    if zk.exists(server_placement(_HOSTNAME)+'/'+app):
-                        zk.delete(server_placement(_HOSTNAME)+'/'+app)
-                time.sleep(5)
+                while True:
+                    cleanup_files = glob.glob(
+                        os.path.join(os.path.join(self.root, CLEANUP_DIR), '*')
+                    )
+                    running_links = glob.glob(
+                        os.path.join(os.path.join(self.root, RUNNING_DIR), '*')
+                    )
+                    if len(cleanup_files)==0 and len(running_links)==0:
+                        break
+
+                    apps = zk.get_children('/placement'+'/'+_HOSTNAME)
+                    for app in set(apps):
+                        if zk.exists('/placement'+'/'+_HOSTNAME+'/'+app):
+                            zk.delete('/placement'+'/'+_HOSTNAME+'/'+app)
+                        if os.path.exists(os.path.join(os.path.join(root, RUNNING_DIR), app)):
+                            with open(os.path.join(os.path.join(root, RUNNING_DIR), app)) as f:
+                                manifest_data = yaml.load(stream=f)
+                            if os.path.exists(os.path.join(os.path.join(root, CACHE_DIR), app)):
+                                os.unlink(os.path.join(os.path.join(root, CACHE_DIR), app))
+                            os.unlink(os.path.join(os.path.join(root, RUNNING_DIR), app))
+                            #time.sleep(2)
+                            try:
+                                client = docker.from_env()
+                                if client.containers.get(manifest_data['container_id']).status == 'running':
+                                    client.containers.get(manifest_data['container_id']).kill()
+                            except:
+                                pass
+                            manifest_file = os.path.join(os.path.join(root, CLEANUP_DIR), app)
+                            if not os.path.exists(manifest_file):
+                                with tempfile.NamedTemporaryFile(dir=os.path.join(root, CLEANUP_DIR),
+                                                                 prefix='.%s-' % app,
+                                                                 delete=False,
+                                                                 mode='w') as temp_manifest:
+                                    yaml.dump(manifest_data, stream=temp_manifest)
+                                os.rename(temp_manifest.name, manifest_file)
                 self._stop(services)
                 if zk.exists(server_presence()):
                     zk.delete(server_presence())
