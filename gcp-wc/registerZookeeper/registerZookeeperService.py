@@ -74,9 +74,10 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
                     zk.create(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'), ephemeral=True)
                     logging.info("Create server.presence node: %s", _HOSTNAME)
             else:
-                if zk.exists(path.server_presence(_HOSTNAME)):
-                    zk.delete(path.server_presence(_HOSTNAME))
-                    logging.info("Delete server.presence node: %s", _HOSTNAME)
+                pass
+                # if zk.exists(path.server_presence(_HOSTNAME)):
+                #     zk.delete(path.server_presence(_HOSTNAME))
+                #     logging.info("Delete server.presence node: %s", _HOSTNAME)
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
 
