@@ -74,20 +74,22 @@ class CleanupSvc (win32serviceutil.ServiceFramework):
         :type event_file:
             ``str``
         """
-        instance_name = os.path.basename(event_file)
+        try:
+            instance_name = os.path.basename(event_file)
 
-        logging.info("cleanup: %s", instance_name)
-        if zk.exists(path.placement(_HOSTNAME + '/' + instance_name)):
-            zk.delete(path.placement(_HOSTNAME + '/' + instance_name))
-        if zk.exists(path_running(instance_name)):
-            zk.delete(path_running(instance_name))
-        rm_safe(os.path.join(os.path.join(self.root, CACHE_DIR), instance_name))
-        with open(os.path.join(os.path.join(self.root, CLEANUP_DIR), instance_name)) as f:
-            manifest_data = yaml.load(stream=f)
-        client.containers.get(manifest_data['container_id']).remove()
-        rm_safe(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name))
-        rm_safe(event_file)
-        pass
+            logging.info("cleanup: %s", instance_name)
+            if zk.exists(path.placement(_HOSTNAME + '/' + instance_name)):
+                zk.delete(path.placement(_HOSTNAME + '/' + instance_name))
+            if zk.exists(path_running(instance_name)):
+                zk.delete(path_running(instance_name))
+            rm_safe(os.path.join(os.path.join(self.root, CACHE_DIR), instance_name))
+            with open(os.path.join(os.path.join(self.root, CLEANUP_DIR), instance_name)) as f:
+                manifest_data = yaml.load(stream=f)
+            client.containers.get(manifest_data['container_id']).remove()
+            rm_safe(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name))
+            rm_safe(event_file)
+        except:
+            pass
 
 def rm_safe(path):
     """Removes file, ignoring the error if file does not exist."""

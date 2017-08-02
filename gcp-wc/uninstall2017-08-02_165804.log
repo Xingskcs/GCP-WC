@@ -1,5 +1,4 @@
 Stopping service WatchdogService
-Error stopping service: 服务尚未启动。 (1062)
 Stopping service AppCfgMgrService
 Error stopping service: 服务尚未启动。 (1062)
 Stopping service AppeventService
@@ -14,8 +13,7 @@ Stopping service StateMonitorService
 Error stopping service: 服务尚未启动。 (1062)
 Stopping service UpdateResourcesService
 Error stopping service: 服务尚未启动。 (1062)
-
-信息: 没有运行的带有指定标准的任务。
+成功: 已终止 PID 为 6412 的进程。
 Removing service WatchdogService
 Service removed
 Removing service AppCfgMgrService
