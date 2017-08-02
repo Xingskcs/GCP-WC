@@ -1,34 +1,31 @@
 Already up-to-date.
-Requirement already satisfied: chardet==3.0.4 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 1))
-Requirement already satisfied: docker==2.4.2 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 2))
-Requirement already satisfied: docker-pycreds==0.2.1 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 3))
-Requirement already satisfied: Events==0.3 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 4))
-Requirement already satisfied: idna==2.5 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 5))
-Requirement already satisfied: kazoo==2.4.0 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 6))
-Requirement already satisfied: psutil==5.2.2 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 7))
-Requirement already satisfied: pypiwin32 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 8))
-Requirement already satisfied: PyYAML==3.12 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 9))
-Requirement already satisfied: requests==2.18.1 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 10))
-Requirement already satisfied: six==1.10.0 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 11))
-Requirement already satisfied: urllib3==1.21.1 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 12))
-Requirement already satisfied: websocket-client==0.44.0 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 13))
-Requirement already satisfied: certifi>=2017.4.17 in c:\users\csskx\appdata\local\programs\python\python35\lib\site-packages (from requests==2.18.1->-r requirements.txt (line 10))
-Installing service AppCfgMgrService
-Service installed
-Installing service AppeventService
-Service installed
-Installing service CleanupService
-Service installed
-Installing service EventDaemonService
-Service installed
-Installing service ScreenMonitorService
-Service installed
-Installing service RegisterZookeeperService
-Service installed
-Installing service StateMonitorService
-Service installed
-Installing service UpdateResourcesService
-Service installed
-Installing service WatchdogService
-Service installed
-Starting service WatchdogService
+Collecting chardet==3.0.4 (from -r requirements.txt (line 1))
+  Using cached chardet-3.0.4-py2.py3-none-any.whl
+Collecting docker==2.4.2 (from -r requirements.txt (line 2))
+  Using cached docker-2.4.2-py2.py3-none-any.whl
+Collecting docker-pycreds==0.2.1 (from -r requirements.txt (line 3))
+  Using cached docker_pycreds-0.2.1-py2.py3-none-any.whl
+Collecting Events==0.3 (from -r requirements.txt (line 4))
+  Using cached Events-0.3.tar.gz
+Collecting idna==2.5 (from -r requirements.txt (line 5))
+  Using cached idna-2.5-py2.py3-none-any.whl
+Collecting kazoo==2.4.0 (from -r requirements.txt (line 6))
+  Using cached kazoo-2.4.0-py2.py3-none-any.whl
+Collecting psutil==5.2.2 (from -r requirements.txt (line 7))
+  Using cached psutil-5.2.2-cp35-cp35m-win_amd64.whl
+Collecting PyYAML==3.12 (from -r requirements.txt (line 8))
+  Using cached PyYAML-3.12-cp35-cp35m-win_amd64.whl
+Collecting requests==2.18.1 (from -r requirements.txt (line 9))
+  Using cached requests-2.18.1-py2.py3-none-any.whl
+Collecting six==1.10.0 (from -r requirements.txt (line 10))
+  Using cached six-1.10.0-py2.py3-none-any.whl
+Collecting urllib3==1.21.1 (from -r requirements.txt (line 11))
+  Using cached urllib3-1.21.1-py2.py3-none-any.whl
+Collecting websocket-client==0.44.0 (from -r requirements.txt (line 12))
+  Using cached websocket_client-0.44.0-py2.py3-none-any.whl
+Collecting certifi>=2017.4.17 (from requests==2.18.1->-r requirements.txt (line 9))
+  Using cached certifi-2017.7.27.1-py2.py3-none-any.whl
+Installing collected packages: chardet, six, docker-pycreds, certifi, urllib3, idna, requests, websocket-client, docker, Events, kazoo, psutil, PyYAML
+  Running setup.py install for Events: started
+    Running setup.py install for Events: finished with status 'done'
+Successfully installed Events-0.3 PyYAML-3.12 certifi-2017.7.27.1 chardet-3.0.4 docker-2.4.2 docker-pycreds-0.2.1 idna-2.5 kazoo-2.4.0 psutil-5.2.2 requests-2.18.1 six-1.10.0 urllib3-1.21.1 websocket-client-0.44.0

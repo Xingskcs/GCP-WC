@@ -1,6 +1,3 @@
-@call :output>install.log
-exit
-:output
 @echo off
 
 git pull origin master
