@@ -1,3 +1,4 @@
+rem install script
 @echo off
 
 git pull origin master
