@@ -47,9 +47,7 @@ class UpdateResourcesSvc (win32serviceutil.ServiceFramework):
         master_hosts = os.getenv("zookeeper")
         zk = KazooClient(hosts = master_hosts)
         zk.start()
-        node_data = zk.get(path.server('node'))
-        # For desktop, we add a 'windows' label, in order to schedule better later.
-        desktop_data = node_data[0].decode().replace('~', 'windows', 1)
+        desktop_data = zk.get(path.server(_HOSTNAME))
         while True:
             # update info
             remain_cpu, remain_mem, remain_disk = monitorResources()
