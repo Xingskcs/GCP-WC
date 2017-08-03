@@ -1,0 +1,33 @@
+Already up-to-date.
+Requirement already satisfied (use --upgrade to upgrade): chardet==3.0.4 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 1))
+Requirement already satisfied (use --upgrade to upgrade): docker==2.4.2 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 2))
+Requirement already satisfied (use --upgrade to upgrade): docker-pycreds==0.2.1 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 3))
+Requirement already satisfied (use --upgrade to upgrade): Events==0.3 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 4))
+Requirement already satisfied (use --upgrade to upgrade): idna==2.5 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 5))
+Requirement already satisfied (use --upgrade to upgrade): kazoo==2.4.0 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 6))
+Requirement already satisfied (use --upgrade to upgrade): psutil==5.2.2 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 7))
+Requirement already satisfied (use --upgrade to upgrade): PyYAML==3.12 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 8))
+Requirement already satisfied (use --upgrade to upgrade): requests==2.18.1 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 9))
+Requirement already satisfied (use --upgrade to upgrade): six==1.10.0 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 10))
+Requirement already satisfied (use --upgrade to upgrade): urllib3==1.21.1 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 11))
+Requirement already satisfied (use --upgrade to upgrade): websocket-client==0.44.0 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 12))
+Requirement already satisfied (use --upgrade to upgrade): certifi>=2017.4.17 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from requests==2.18.1->-r requirements.txt (line 9))
+Installing service AppCfgMgrService
+Service installed
+Installing service AppeventService
+Service installed
+Installing service CleanupService
+Service installed
+Installing service EventDaemonService
+Service installed
+Installing service ScreenMonitorService
+Service installed
+Installing service RegisterZookeeperService
+Service installed
+Installing service StateMonitorService
+Service installed
+Installing service UpdateResourcesService
+Service installed
+Installing service WatchdogService
+Service installed
+Starting service WatchdogService
