@@ -61,7 +61,9 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
             if screen_state == 'Lock':
             #if True:
                 create_workDirectory(self.root)
-                desktop_data = zk.get(path.server(_HOSTNAME))
+                node_data = zk.get(path.server('node'))
+                # For desktop, we add a 'windows' label, in order to schedule better later.
+                desktop_data = node_data[0].decode().replace('~', 'windows', 1)
                 if not zk.exists(path.server(_HOSTNAME)):
                     zk.create(path.server(_HOSTNAME), desktop_data.encode('utf-8'))
                     logging.info("Create servers node: %s", _HOSTNAME)
