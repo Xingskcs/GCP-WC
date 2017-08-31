@@ -96,7 +96,7 @@ def configure(zk, client, root, instance_name):
         manifest_data = yaml.load(stream=f)
     docker_container = client.containers.create(image = manifest_data['image'],
                                                 mem_limit = manifest_data['memory'],
-                                                cpu_percent = int(manifest_data['cpu'][:2]),
+                                                cpu_percent = int(manifest_data['cpu'][:len(manifest_data['cpu'])-1]),
                                                 command = manifest_data['services'][0]['command'])
 
     if docker_container in client.containers.list(all):
