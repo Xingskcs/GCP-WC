@@ -136,6 +136,7 @@ def synchronize(zk, expected, root):
                 client = docker.from_env()
                 if client.containers.get(manifest_data['container_id']).status == 'running':
                     client.containers.get(manifest_data['container_id']).kill()
+					client.containers.get(manifest_data['container_id']).remove()
             except:
                 pass
             manifest_file = os.path.join(os.path.join(root, CLEANUP_DIR), app)
