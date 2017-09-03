@@ -223,8 +223,8 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
                             if zk.exists(server_presence()):
                                 zk.delete(server_presence())
                     else:
-                        self._stop(services)
                         flag = True
+                        self._stop(services)
                         if zk.exists(server_presence()):
                             zk.delete(server_presence())
                         try:
@@ -256,87 +256,27 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
             previous_state = zk.state
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
-    # def SvcDoRun(self):
-    #     master_hosts = os.getenv("zookeeper")
-    #     zk = KazooClient(hosts=master_hosts)
-    #     zk.start()
-    #
-    #     services = []
-    #     app_cfg = ServiceManager(_APPCFGMGR)
-    #     services.append(app_cfg)
-    #     app_events = ServiceManager(_APPEVENTS)
-    #     services.append(app_events)
-    #     clean_up = ServiceManager(_CLEANUP)
-    #     services.append(clean_up)
-    #     event_daemon = ServiceManager(_EVENTDAEMON)
-    #     services.append(event_daemon)
-    #     register_zk = ServiceManager(_REGISTERZOOKEEPER)
-    #     services.append(register_zk)
-    #     state_monitor = ServiceManager(_STATEMONITOR)
-    #     services.append(state_monitor)
-    #     update_resources = ServiceManager(_UPDATERESOURCES)
-    #     services.append(update_resources)
-    #     screen_monitor = ServiceManager(_SCREENMONITOR)
-    #     services.append(screen_monitor)
-    #
-    #     self._start(services)
-    #     previous_state = zk.state
-    #     while True:
-    #         try:
-    #             if zk.state == 'CONNECTED':
-    #                 if previous_state == 'SUSPENDED':
-    #                     self._start(services)
-    #                 if self._serviceStatus(services):
-    #                     #zk.ensure_path(server_presence())
-    #                     pass
-    #                 else:
-    #                     self._stop(services)
-    #                     if zk.exists(server_presence()):
-    #                         zk.delete(server_presence())
-    #             else:
-    #                 self._stop(services)
-    #                 if zk.exists(server_presence()):
-    #                     zk.delete(server_presence())
-    #                 try:
-    #                     zk.start()
-    #                 except:
-    #                     pass
-    #         except:
-    #             pass
-    #         previous_state = zk.state
-    #         if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
-    #             break
 
 
     def _start(self, services):
-        try:
-            for service in services:
-                if service.status() == 'STOPPED':
-                    service.start()
-        except:
-            pass
+        for service in services:
+            if service.status() == 'STOPPED':
+                service.start()
 
     def _stop(self, services):
-        try:
-            for service in services:
-                if service.status() == 'RUNNING':
-                    if service.name == 'AppCfgMgrService':
-                        os.system('TASKKILL /F /FI "services eq AppCfgMgrService"')
-                    elif service.name == 'ScreenMonitorService':
-                        pass
-                    else:
-                        service.stop()
-        except:
-            pass
+        for service in services:
+            if service.status() == 'RUNNING':
+                if service.name == 'ScreenMonitorService' or service.name == 'CleanupService':
+                    #os.system('TASKKILL /F /FI "services eq ScreenMonitorService"')
+                    pass
+                else:
+                    os.system('TASKKILL /F /FI "services eq {name}"'.format(name=service.name))
 
     def _serviceStatus(self, services):
-        try:
-            for service in services:
-                if service.status() == 'STOPPED':
-                    logging.info('failed service: '+str(service.name))
-                    return False
-        except:
-            return False
+        for service in services:
+            if service.status() == 'STOPPED':
+                logging.info('failed service: '+str(service.name))
+                return False
         return True
 
 def server_presence():

@@ -63,41 +63,44 @@ class EventDaemonSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = os.getenv("zookeeper")
-        zk = KazooClient(hosts = master_hosts)
-        zk.start()
-        seen = zk.handler.event_object()
-        # start not ready
-        seen.clear()
-        while True:
-            # Wait for presence node to appear. Once up, syncronize the placement.
-            @zk.DataWatch(path.server_presence(_HOSTNAME))
-            def _server_presence_update(data, _stat, event):
-                """Watch server presence"""
-                if data is None and event is None:
-                    # The node is not there yet, wait
-                    logging.info('Server node missing.')
-                    seen.clear()
-                    cache_notify(self.root, False)
-                elif event is not None and event.type == 'DELETED':
-                    seen.set()
-                    if not zk.exists(path.placement(_HOSTNAME)):
-                        zk.create(path.placement(_HOSTNAME))
-                    apps = zk.get_children(path.placement(_HOSTNAME))
-                    synchronize(zk, apps, self.root)
-                    logging.info('Presence node deleted.')
-                    seen.clear()
-                    cache_notify(self.root, False)
-                else:
-                    # logging.info('Presence is up.')
-                    seen.set()
-                    if not zk.exists(path.placement(_HOSTNAME)):
-                        zk.create(path.placement(_HOSTNAME))
-                    apps = zk.get_children(path.placement(_HOSTNAME))
-                    synchronize(zk, apps, self.root)
-                return True
-            if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
-                break
+        try:
+            master_hosts = os.getenv("zookeeper")
+            zk = KazooClient(hosts = master_hosts)
+            zk.start()
+            seen = zk.handler.event_object()
+            # start not ready
+            seen.clear()
+            while True:
+                # Wait for presence node to appear. Once up, syncronize the placement.
+                @zk.DataWatch(path.server_presence(_HOSTNAME))
+                def _server_presence_update(data, _stat, event):
+                    """Watch server presence"""
+                    if data is None and event is None:
+                        # The node is not there yet, wait
+                        logging.info('Server node missing.')
+                        seen.clear()
+                        cache_notify(self.root, False)
+                    elif event is not None and event.type == 'DELETED':
+                        seen.set()
+                        if not zk.exists(path.placement(_HOSTNAME)):
+                            zk.create(path.placement(_HOSTNAME))
+                        apps = zk.get_children(path.placement(_HOSTNAME))
+                        synchronize(zk, apps, self.root)
+                        logging.info('Presence node deleted.')
+                        seen.clear()
+                        cache_notify(self.root, False)
+                    else:
+                        # logging.info('Presence is up.')
+                        seen.set()
+                        if not zk.exists(path.placement(_HOSTNAME)):
+                            zk.create(path.placement(_HOSTNAME))
+                        apps = zk.get_children(path.placement(_HOSTNAME))
+                        synchronize(zk, apps, self.root)
+                    return True
+                if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+                    break
+        except:
+            pass
 
 def synchronize(zk, expected, root):
     """synchronize local app cache with the expected list.

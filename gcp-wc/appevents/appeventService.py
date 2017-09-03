@@ -46,21 +46,24 @@ class AppeventSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = os.getenv("zookeeper")
-        zk = KazooClient(hosts = master_hosts)
-        zk.start()
-        while True:
-            post_files = glob.glob(
-                os.path.join(os.path.join(self.root, APP_EVENTS_DIR), '*')
-            )
-            logging.info('content of %r : %r',
-                         os.path.join(self.root, APP_EVENTS_DIR),
-                         post_files)
-            for post_file in post_files:
-                self._post(zk, post_file)
+        try:
+            master_hosts = os.getenv("zookeeper")
+            zk = KazooClient(hosts = master_hosts)
+            zk.start()
+            while True:
+                post_files = glob.glob(
+                    os.path.join(os.path.join(self.root, APP_EVENTS_DIR), '*')
+                )
+                logging.info('content of %r : %r',
+                             os.path.join(self.root, APP_EVENTS_DIR),
+                             post_files)
+                for post_file in post_files:
+                    self._post(zk, post_file)
 
-            if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
-                break
+                if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+                    break
+        except:
+            pass
 
     def _post(self, zk, path):
         localpath = os.path.basename(path)

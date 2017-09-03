@@ -82,12 +82,18 @@ class MonitorScreenSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        m = WTSMonitor(self.root, all_sessions=True)
-        while True:
-            m.start()
-            if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
-                break
-            # m.stop()
+        try:
+            f = open(os.path.join(self.root, screen_state_file), 'w')
+            f.write("Unlock")
+            f.close()
+            m = WTSMonitor(self.root, all_sessions=True)
+            while True:
+                m.start()
+                if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+                    break
+                # m.stop()
+        except:
+            pass
 
 class WTSMonitor():
     """Monitor Windows screen"""

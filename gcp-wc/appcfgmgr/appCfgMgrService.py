@@ -57,12 +57,12 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = os.getenv("zookeeper")
-        zk = KazooClient(hosts=master_hosts)
-        zk.start()
-        client = docker.from_env()
-        while True:
-            try:
+        try:
+            master_hosts = os.getenv("zookeeper")
+            zk = KazooClient(hosts=master_hosts)
+            zk.start()
+            client = docker.from_env()
+            while True:
                 cached_files = glob.glob(
                     os.path.join(os.path.join(self.root, CACHE_DIR), '*')
                 )
@@ -72,10 +72,10 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
                 for file_name in set(cached_files) - set(running_links):
                     if not os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), os.path.basename(file_name))):
                         configure(zk, client, self.root, os.path.basename(file_name))
-            except:
-                pass
-            if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
-                break
+                if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+                    break
+        except:
+            pass
 
 def configure(zk, client, root, instance_name):
     """Configures and starts the instance based on instance cached event.

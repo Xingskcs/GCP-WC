@@ -49,37 +49,40 @@ class RegisterZookeeperSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = os.getenv("zookeeper")
-        zk = KazooClient(hosts = master_hosts)
-        zk.start()
-        client = docker.from_env()
-        screen_state = "Unlock"
-        while True:
-            if os.path.exists(os.path.join(self.root, screen_state_file)):
-                f = open(os.path.join(self.root, screen_state_file), 'r')
-                screen_state = f.read()
-            if screen_state == 'Lock':
-            #if True:
-                create_workDirectory(self.root)
-                node_data = zk.get(path.server('node'))
-                # For desktop, we add a 'windows' label, in order to schedule better later.
-                desktop_data = node_data[0].decode().replace('~', 'windows', 1)
-                if not zk.exists(path.server(_HOSTNAME)):
-                    zk.create(path.server(_HOSTNAME), desktop_data.encode('utf-8'))
-                    logging.info("Create servers node: %s", _HOSTNAME)
-                if zk.exists(path.blackedout_server(_HOSTNAME)):
-                    if zk.exists(path.server_presence(_HOSTNAME)):
-                        zk.delete(path.server_presence(_HOSTNAME))
-                elif not zk.exists(path.server_presence(_HOSTNAME)):
-                    zk.create(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'), ephemeral=True)
-                    logging.info("Create server.presence node: %s", _HOSTNAME)
-            else:
-                pass
-                # if zk.exists(path.server_presence(_HOSTNAME)):
-                #     zk.delete(path.server_presence(_HOSTNAME))
-                #     logging.info("Delete server.presence node: %s", _HOSTNAME)
-            if win32event.WaitForSingleObject(self.hWaitStop, 100) == win32event.WAIT_OBJECT_0:
-                break
+        try:
+            master_hosts = os.getenv("zookeeper")
+            zk = KazooClient(hosts = master_hosts)
+            zk.start()
+            client = docker.from_env()
+            screen_state = "Unlock"
+            while True:
+                if os.path.exists(os.path.join(self.root, screen_state_file)):
+                    f = open(os.path.join(self.root, screen_state_file), 'r')
+                    screen_state = f.read()
+                if screen_state == 'Lock':
+                #if True:
+                    create_workDirectory(self.root)
+                    node_data = zk.get(path.server('node'))
+                    # For desktop, we add a 'windows' label, in order to schedule better later.
+                    desktop_data = node_data[0].decode().replace('~', 'windows', 1)
+                    if not zk.exists(path.server(_HOSTNAME)):
+                        zk.create(path.server(_HOSTNAME), desktop_data.encode('utf-8'))
+                        logging.info("Create servers node: %s", _HOSTNAME)
+                    if zk.exists(path.blackedout_server(_HOSTNAME)):
+                        if zk.exists(path.server_presence(_HOSTNAME)):
+                            zk.delete(path.server_presence(_HOSTNAME))
+                    elif not zk.exists(path.server_presence(_HOSTNAME)):
+                        zk.create(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'), ephemeral=True)
+                        logging.info("Create server.presence node: %s", _HOSTNAME)
+                else:
+                    pass
+                    # if zk.exists(path.server_presence(_HOSTNAME)):
+                    #     zk.delete(path.server_presence(_HOSTNAME))
+                    #     logging.info("Delete server.presence node: %s", _HOSTNAME)
+                if win32event.WaitForSingleObject(self.hWaitStop, 100) == win32event.WAIT_OBJECT_0:
+                    break
+        except:
+            pass
 
 def create_workDirectory(root):
     if not os.path.exists(os.path.join(root, 'appevents')):

@@ -66,136 +66,139 @@ class StateMonitorSvc (win32serviceutil.ServiceFramework):
         else, aborted and so on.
         if finished, docker rm container and state change to deleted.
         """
-        master_hosts = os.getenv("zookeeper")
-        zk = KazooClient(hosts = master_hosts)
-        zk.start()
-        client = docker.from_env()
-        while True:
-            running_containers = {}
-            running_apps = {
-                os.path.basename(manifest)
-                for manifest in glob.glob(os.path.join(os.path.join(self.root, RUNNING_DIR), '*'))
-            }
-            cleanup_apps = {
-                os.path.basename(manifest)
-                for manifest in glob.glob(os.path.join(os.path.join(self.root, CLEANUP_DIR), '*'))
-            }
-            for app in running_apps-cleanup_apps:
-                with open(os.path.join(os.path.join(self.root, RUNNING_DIR), app)) as f:
-                    manifest_data = yaml.load(stream=f)
-                running_containers[manifest_data['container_id']] = app
+        try:
+            master_hosts = os.getenv("zookeeper")
+            zk = KazooClient(hosts = master_hosts)
+            zk.start()
+            client = docker.from_env()
+            while True:
+                running_containers = {}
+                running_apps = {
+                    os.path.basename(manifest)
+                    for manifest in glob.glob(os.path.join(os.path.join(self.root, RUNNING_DIR), '*'))
+                }
+                cleanup_apps = {
+                    os.path.basename(manifest)
+                    for manifest in glob.glob(os.path.join(os.path.join(self.root, CLEANUP_DIR), '*'))
+                }
+                for app in running_apps-cleanup_apps:
+                    with open(os.path.join(os.path.join(self.root, RUNNING_DIR), app)) as f:
+                        manifest_data = yaml.load(stream=f)
+                    running_containers[manifest_data['container_id']] = app
 
-            exited_containers = set()
-            for exited_container in client.containers.list(all, filters={"status": "exited"}):
-                exited_containers.add(exited_container.id)
+                exited_containers = set()
+                for exited_container in client.containers.list(all, filters={"status": "exited"}):
+                    exited_containers.add(exited_container.id)
 
-            finished_containers = set()
-            for finished_container in client.containers.list(all, filters={"exited": "0"}):
-                finished_containers.add(finished_container.id)
+                finished_containers = set()
+                for finished_container in client.containers.list(all, filters={"exited": "0"}):
+                    finished_containers.add(finished_container.id)
 
-            killed_containers = set()
-            for killed_container in client.containers.list(all, filters={"exited": "137"}):
-                killed_containers.add(killed_container.id)
+                killed_containers = set()
+                for killed_container in client.containers.list(all, filters={"exited": "137"}):
+                    killed_containers.add(killed_container.id)
 
-            aborted_containers = {}
-            for exited_code in range(1, 256):
-                if (exited_code != 137):
-                    for container in client.containers.list(all, filters={"exited": str(exited_code)}):
-                        aborted_containers[container.id] = exited_code
+                aborted_containers = {}
+                for exited_code in range(1, 256):
+                    if (exited_code != 137):
+                        for container in client.containers.list(all, filters={"exited": str(exited_code)}):
+                            aborted_containers[container.id] = exited_code
 
-            for container_id in running_containers:
-                if container_id in exited_containers:
-                    instance_name = running_containers.get(container_id)
-                    if (os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name))):
-                        with open(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name)) as f:
-                            manifest_data = yaml.load(stream=f)
+                for container_id in running_containers:
+                    if container_id in exited_containers:
+                        instance_name = running_containers.get(container_id)
+                        if (os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name))):
+                            with open(os.path.join(os.path.join(self.root, RUNNING_DIR), instance_name)) as f:
+                                manifest_data = yaml.load(stream=f)
 
-                        # if container is normally finished
-                        if container_id in finished_containers:
-                            #create exited node
-                            logging.info("exited: %s", running_containers.get(container_id))
-                            post(
-                                os.path.join(self.root, APP_EVENTS_DIR),
-                                ServiceExitedTraceEvent(
-                                    instanceid=instance_name,
-                                    uniqueid=container_id,
-                                    service=manifest_data['services'][0]['name'],
-                                    rc='0',
-                                    signal='0'
+                            # if container is normally finished
+                            if container_id in finished_containers:
+                                #create exited node
+                                logging.info("exited: %s", running_containers.get(container_id))
+                                post(
+                                    os.path.join(self.root, APP_EVENTS_DIR),
+                                    ServiceExitedTraceEvent(
+                                        instanceid=instance_name,
+                                        uniqueid=container_id,
+                                        service=manifest_data['services'][0]['name'],
+                                        rc='0',
+                                        signal='0'
+                                    )
                                 )
-                            )
-                            # create finished node
-                            logging.info("finished: %s", running_containers.get(container_id))
-                            post(
-                                os.path.join(self.root, APP_EVENTS_DIR),
-                                FinishedTraceEvent(
-                                    instanceid=instance_name,
-                                    rc='0',
-                                    signal='0',
-                                    payload=''
+                                # create finished node
+                                logging.info("finished: %s", running_containers.get(container_id))
+                                post(
+                                    os.path.join(self.root, APP_EVENTS_DIR),
+                                    FinishedTraceEvent(
+                                        instanceid=instance_name,
+                                        rc='0',
+                                        signal='0',
+                                        payload=''
+                                    )
                                 )
-                            )
-                            zk.delete(path.scheduled(instance_name))
-                            if os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id))):
-                                shutil.copy(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id)),
-                                            os.path.join(self.root, CLEANUP_DIR))
-                        # if container is killed
-                        elif container_id in killed_containers:
-                            # create exited node
-                            logging.info("exited: %s", running_containers.get(container_id))
-                            post(
-                                os.path.join(self.root, APP_EVENTS_DIR),
-                                ServiceExitedTraceEvent(
-                                    instanceid=instance_name,
-                                    uniqueid=container_id,
-                                    service=manifest_data['services'][0]['name'],
-                                    rc='137',
-                                    signal='137'
+                                zk.delete(path.scheduled(instance_name))
+                                if os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id))):
+                                    shutil.copy(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id)),
+                                                os.path.join(self.root, CLEANUP_DIR))
+                            # if container is killed
+                            elif container_id in killed_containers:
+                                # create exited node
+                                logging.info("exited: %s", running_containers.get(container_id))
+                                post(
+                                    os.path.join(self.root, APP_EVENTS_DIR),
+                                    ServiceExitedTraceEvent(
+                                        instanceid=instance_name,
+                                        uniqueid=container_id,
+                                        service=manifest_data['services'][0]['name'],
+                                        rc='137',
+                                        signal='137'
+                                    )
                                 )
-                            )
-                            # create killed node
-                            logging.info("killed: %s", running_containers.get(container_id))
-                            post(
-                                os.path.join(self.root, APP_EVENTS_DIR),
-                                KilledTraceEvent(
-                                    instanceid=instance_name,
-                                    # is_oom=bool(exitinfo.get('oom')),
-                                    is_oom=False,
+                                # create killed node
+                                logging.info("killed: %s", running_containers.get(container_id))
+                                post(
+                                    os.path.join(self.root, APP_EVENTS_DIR),
+                                    KilledTraceEvent(
+                                        instanceid=instance_name,
+                                        # is_oom=bool(exitinfo.get('oom')),
+                                        is_oom=False,
+                                    )
                                 )
-                            )
-                            if os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id))):
-                                shutil.copy(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id)),
-                                            os.path.join(self.root, CLEANUP_DIR))
-                        # if container is aborted
-                        else:
-                            # create exited node
-                            logging.info("exited: %s", running_containers.get(container_id))
-                            post(
-                                os.path.join(self.root, APP_EVENTS_DIR),
-                                ServiceExitedTraceEvent(
-                                    instanceid=instance_name,
-                                    uniqueid=container_id,
-                                    service=manifest_data['services'][0]['name'],
-                                    rc=str(aborted_containers.get(container_id)),
-                                    signal=str(aborted_containers.get(container_id))
+                                if os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id))):
+                                    shutil.copy(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id)),
+                                                os.path.join(self.root, CLEANUP_DIR))
+                            # if container is aborted
+                            else:
+                                # create exited node
+                                logging.info("exited: %s", running_containers.get(container_id))
+                                post(
+                                    os.path.join(self.root, APP_EVENTS_DIR),
+                                    ServiceExitedTraceEvent(
+                                        instanceid=instance_name,
+                                        uniqueid=container_id,
+                                        service=manifest_data['services'][0]['name'],
+                                        rc=str(aborted_containers.get(container_id)),
+                                        signal=str(aborted_containers.get(container_id))
+                                    )
                                 )
-                            )
-                            # create aborted node
-                            logging.info("aborted: %s", running_containers.get(container_id))
-                            post(
-                                os.path.join(self.root, APP_EVENTS_DIR),
-                                AbortedTraceEvent(
-                                    why=str(aborted_containers.get(container_id)),
-                                    instanceid=instance_name,
-                                    payload=None
+                                # create aborted node
+                                logging.info("aborted: %s", running_containers.get(container_id))
+                                post(
+                                    os.path.join(self.root, APP_EVENTS_DIR),
+                                    AbortedTraceEvent(
+                                        why=str(aborted_containers.get(container_id)),
+                                        instanceid=instance_name,
+                                        payload=None
+                                    )
                                 )
-                            )
-                            if os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id))):
-                                shutil.copy(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id)),
-                                            os.path.join(self.root, CLEANUP_DIR))
+                                if os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id))):
+                                    shutil.copy(os.path.join(os.path.join(self.root, RUNNING_DIR), running_containers.get(container_id)),
+                                                os.path.join(self.root, CLEANUP_DIR))
 
-            if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
-                break
+                if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+                    break
+        except:
+            pass
 
 def join_zookeeper_path(root, *child):
     """"Returns zookeeper path joined by slash."""

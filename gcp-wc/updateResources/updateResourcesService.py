@@ -44,26 +44,29 @@ class UpdateResourcesSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = os.getenv("zookeeper")
-        zk = KazooClient(hosts = master_hosts)
-        zk.start()
-        node_data = zk.get(path.server('node'))
-        # For desktop, we add a 'windows' label, in order to schedule better later.
-        desktop_data = node_data[0].decode().replace('~', 'windows', 1)
-        while True:
-            # update info
-            remain_cpu, remain_mem, remain_disk = monitorResources()
-            update_info = 'cpu: {cpuinfo}%\ndisk: {diskinfo}M\nlabel: windows\nmemory: {meminfo}M\n'.format(
-                cpuinfo=remain_cpu, diskinfo=remain_disk, meminfo=remain_mem)
-            desktop_data = update_info + desktop_data[desktop_data.find('parent'):]
-            if zk.exists(path.server(_HOSTNAME)):
-                zk.set(path.server(_HOSTNAME), desktop_data.encode('utf-8'))
-                logging.info("Update resources infomation %s", _HOSTNAME)
-            if zk.exists(path.server_presence(_HOSTNAME)):
-                zk.set(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'))
-                logging.info("Update resources infomation %s", _HOSTNAME)
-            if win32event.WaitForSingleObject(self.hWaitStop, int(os.getenv("updateResourcesInterval"))) == win32event.WAIT_OBJECT_0:
-                break
+        try:
+            master_hosts = os.getenv("zookeeper")
+            zk = KazooClient(hosts = master_hosts)
+            zk.start()
+            node_data = zk.get(path.server('node'))
+            # For desktop, we add a 'windows' label, in order to schedule better later.
+            desktop_data = node_data[0].decode().replace('~', 'windows', 1)
+            while True:
+                # update info
+                remain_cpu, remain_mem, remain_disk = monitorResources()
+                update_info = 'cpu: {cpuinfo}%\ndisk: {diskinfo}M\nlabel: windows\nmemory: {meminfo}M\n'.format(
+                    cpuinfo=remain_cpu, diskinfo=remain_disk, meminfo=remain_mem)
+                desktop_data = update_info + desktop_data[desktop_data.find('parent'):]
+                if zk.exists(path.server(_HOSTNAME)):
+                    zk.set(path.server(_HOSTNAME), desktop_data.encode('utf-8'))
+                    logging.info("Update resources infomation %s", _HOSTNAME)
+                if zk.exists(path.server_presence(_HOSTNAME)):
+                    zk.set(path.server_presence(_HOSTNAME), desktop_data.encode('utf-8'))
+                    logging.info("Update resources infomation %s", _HOSTNAME)
+                if win32event.WaitForSingleObject(self.hWaitStop, int(os.getenv("updateResourcesInterval"))) == win32event.WAIT_OBJECT_0:
+                    break
+        except:
+            pass
 
 def monitorResources(interval=1.0):
     """Monitor windows desktop's resources useage

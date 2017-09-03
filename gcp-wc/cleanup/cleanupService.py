@@ -50,21 +50,42 @@ class CleanupSvc (win32serviceutil.ServiceFramework):
         win32event.SetEvent(self.hWaitStop)
 
     def SvcDoRun(self):
-        master_hosts = os.getenv("zookeeper")
-        zk = KazooClient(hosts = master_hosts)
-        zk.start()
-        client = docker.from_env()
-        while True:
-            cleanup_files = glob.glob(
-                os.path.join(os.path.join(self.root, CLEANUP_DIR), '*')
-            )
-            logging.info('content of %r : %r',
-                         os.path.join(self.root, CLEANUP_DIR),
-                         cleanup_files)
-            for cleanup_file in cleanup_files:
-                self._cleanup(zk, client, cleanup_file)
-            if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
-                break
+        try:
+            master_hosts = os.getenv("zookeeper")
+            zk = KazooClient(hosts = master_hosts)
+            zk.start()
+            client = docker.from_env()
+            while True:
+                cleanup_files = glob.glob(
+                    os.path.join(os.path.join(self.root, CLEANUP_DIR), '*')
+                )
+                cache_apps = {
+                    os.path.basename(manifest)
+                    for manifest in glob.glob(os.path.join(os.path.join(self.root, CACHE_DIR), '*'))
+                }
+                running_apps = {
+                    os.path.basename(manifest)
+                    for manifest in glob.glob(os.path.join(os.path.join(self.root, RUNNING_DIR), '*'))
+                }
+                logging.info('content of %r : %r',
+                             os.path.join(self.root, CLEANUP_DIR),
+                             cleanup_files)
+                for cleanup_file in cleanup_files:
+                    instance_name = os.path.basename(cleanup_file)
+                    if instance_name not in cache_apps and instance_name not in running_apps:
+                        try:
+                            with open(os.path.join(os.path.join(self.root, CLEANUP_DIR), instance_name)) as f:
+                                manifest_data = yaml.load(stream=f)
+                            client.containers.get(manifest_data['container_id']).remove()
+                        except:
+                            pass
+                        rm_safe(cleanup_file)
+                    else:
+                        self._cleanup(zk, client, cleanup_file)
+                if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
+                    break
+        except:
+            pass
 
     def _cleanup(self, zk, client, event_file):
         """Handle a new cleanup event: cleanup a container.
