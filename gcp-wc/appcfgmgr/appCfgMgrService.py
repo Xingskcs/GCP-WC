@@ -62,15 +62,18 @@ class AppCfgMgrSvc (win32serviceutil.ServiceFramework):
         zk.start()
         client = docker.from_env()
         while True:
-            cached_files = glob.glob(
-                os.path.join(os.path.join(self.root, CACHE_DIR), '*')
-            )
-            running_links = glob.glob(
-                os.path.join(os.path.join(self.root, RUNNING_DIR), '*')
-            )
-            for file_name in set(cached_files) - set(running_links):
-                if not os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), os.path.basename(file_name))):
-                    configure(zk, client, self.root, os.path.basename(file_name))
+            try:
+                cached_files = glob.glob(
+                    os.path.join(os.path.join(self.root, CACHE_DIR), '*')
+                )
+                running_links = glob.glob(
+                    os.path.join(os.path.join(self.root, RUNNING_DIR), '*')
+                )
+                for file_name in set(cached_files) - set(running_links):
+                    if not os.path.exists(os.path.join(os.path.join(self.root, RUNNING_DIR), os.path.basename(file_name))):
+                        configure(zk, client, self.root, os.path.basename(file_name))
+            except:
+                pass
             if win32event.WaitForSingleObject(self.hWaitStop, 2000) == win32event.WAIT_OBJECT_0:
                 break
 

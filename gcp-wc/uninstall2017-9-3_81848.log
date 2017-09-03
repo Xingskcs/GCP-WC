@@ -1,0 +1,52 @@
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\watchdog\watchdogService.py stop  
+[2017/9/3, 8:18:48] Stopping service WatchdogService 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\appcfgmgr\appcfgMgrService.py stop  
+[2017/9/3, 8:18:48] Stopping service AppCfgMgrService 
+[2017/9/3, 8:18:48] Error stopping service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\appevents\appeventService.py stop  
+[2017/9/3, 8:18:48] Stopping service AppeventService 
+[2017/9/3, 8:18:48] Error stopping service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\cleanup\cleanupService.py stop  
+[2017/9/3, 8:18:48] Stopping service CleanupService 
+[2017/9/3, 8:18:48] Error stopping service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\event_daemon\eventDaemonService.py stop  
+[2017/9/3, 8:18:48] Stopping service EventDaemonService 
+[2017/9/3, 8:18:48] Error stopping service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\registerZookeeper\registerZookeeperService.py stop  
+[2017/9/3, 8:18:48] Stopping service RegisterZookeeperService 
+[2017/9/3, 8:18:48] Error stopping service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\stateMonitor\stateMonitorService.py stop  
+[2017/9/3, 8:18:48] Stopping service StateMonitorService 
+[2017/9/3, 8:18:48] Error stopping service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\updateResources\updateResourcesService.py stop  
+[2017/9/3, 8:18:48] Stopping service UpdateResourcesService 
+[2017/9/3, 8:18:48] Error stopping service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>TASKKILL /F /FI "services eq ScreenMonitorService"  
+[2017/9/3, 8:18:48] 信息: 没有运行的带有指定标准的任务。 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\watchdog\watchdogService.py remove  
+[2017/9/3, 8:18:48] Removing service WatchdogService 
+[2017/9/3, 8:18:48] Service removed 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\appcfgmgr\appcfgMgrService.py remove  
+[2017/9/3, 8:18:48] Removing service AppCfgMgrService 
+[2017/9/3, 8:18:48] Error removing service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\appevents\appeventService.py remove  
+[2017/9/3, 8:18:48] Removing service AppeventService 
+[2017/9/3, 8:18:48] Error removing service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\cleanup\cleanupService.py remove  
+[2017/9/3, 8:18:48] Removing service CleanupService 
+[2017/9/3, 8:18:48] Error removing service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\event_daemon\eventDaemonService.py remove  
+[2017/9/3, 8:18:48] Removing service EventDaemonService 
+[2017/9/3, 8:18:48] Error removing service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\monitorScreen\monitorScreenService.py remove  
+[2017/9/3, 8:18:48] Removing service ScreenMonitorService 
+[2017/9/3, 8:18:48] Service removed 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\registerZookeeper\registerZookeeperService.py remove  
+[2017/9/3, 8:18:48] Removing service RegisterZookeeperService 
+[2017/9/3, 8:18:48] Error removing service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\stateMonitor\stateMonitorService.py remove  
+[2017/9/3, 8:18:48] Removing service StateMonitorService 
+[2017/9/3, 8:18:48] Error removing service: 指定的服务未安装。 (1060) 
+[2017/9/3, 8:18:48] C:\GCP-WC\gcp-wc>python .\updateResources\updateResourcesService.py remove  
+[2017/9/3, 8:18:48] Removing service UpdateResourcesService 
+[2017/9/3, 8:18:48] Error removing service: 指定的服务未安装。 (1060) 

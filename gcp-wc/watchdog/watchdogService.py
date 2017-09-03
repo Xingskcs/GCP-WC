@@ -205,13 +205,16 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
 
         self._start(services)
         previous_state = zk.state
+        flag = True
         while True:
             f = open(os.path.join(self.root, screen_state_file), 'r')
             screen_state = f.read()
             if screen_state == 'Lock':
                 try:
                     if zk.state == 'CONNECTED':
-                        self._start(services)
+                        if flag:
+                            self._start(services)
+                            flag = False
                         if self._serviceStatus(services):
                             # zk.ensure_path(server_presence())
                             pass
@@ -221,6 +224,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
                                 zk.delete(server_presence())
                     else:
                         self._stop(services)
+                        flag = True
                         if zk.exists(server_presence()):
                             zk.delete(server_presence())
                         try:
@@ -230,6 +234,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
                 except:
                     pass
             else:
+                flag = True
                 apps = zk.get_children('/placement'+'/'+_HOSTNAME)
                 for app in apps:
                     if zk.exists('/placement'+'/'+_HOSTNAME+'/'+app):
@@ -304,24 +309,34 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
 
 
     def _start(self, services):
-        for service in services:
-            if service.status() == 'STOPPED':
-                service.start()
+        try:
+            for service in services:
+                if service.status() == 'STOPPED':
+                    service.start()
+        except:
+            pass
 
     def _stop(self, services):
-        for service in services:
-            if service.status() == 'RUNNING':
-                if service.name == 'ScreenMonitorService':
-                    #os.system('TASKKILL /F /FI "services eq ScreenMonitorService"')
-                    pass
-                else:
-                    service.stop()
+        try:
+            for service in services:
+                if service.status() == 'RUNNING':
+                    if service.name == 'AppCfgMgrService':
+                        os.system('TASKKILL /F /FI "services eq AppCfgMgrService"')
+                    elif service.name == 'ScreenMonitorService':
+                        pass
+                    else:
+                        service.stop()
+        except:
+            pass
 
     def _serviceStatus(self, services):
-        for service in services:
-            if service.status() == 'STOPPED':
-                logging.info('failed service: '+str(service.name))
-                return False
+        try:
+            for service in services:
+                if service.status() == 'STOPPED':
+                    logging.info('failed service: '+str(service.name))
+                    return False
+        except:
+            return False
         return True
 
 def server_presence():

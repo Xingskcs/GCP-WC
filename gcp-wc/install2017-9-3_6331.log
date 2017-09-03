@@ -1,0 +1,43 @@
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>pip install -r requirements.txt  
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): chardet==3.0.4 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 1)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): docker==2.4.2 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 2)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): docker-pycreds==0.2.1 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 3)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): Events==0.3 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 4)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): idna==2.5 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 5)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): kazoo==2.4.0 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 6)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): psutil==5.2.2 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 7)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): PyYAML==3.12 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 8)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): requests==2.18.1 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 9)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): six==1.10.0 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 10)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): urllib3==1.21.1 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 11)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): websocket-client==0.44.0 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from -r requirements.txt (line 12)) 
+[2017-9-3, 6:3:31] Requirement already satisfied (use --upgrade to upgrade): certifi>=2017.4.17 in c:\users\administrator\appdata\local\programs\python\python35\lib\site-packages (from requests==2.18.1->-r requirements.txt (line 9)) 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\appcfgmgr\appcfgMgrService.py install  
+[2017-9-3, 6:3:31] Installing service AppCfgMgrService 
+[2017-9-3, 6:3:31] Error installing service: 指定的服务已标记为删除。 (1072) 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\appevents\appeventService.py install  
+[2017-9-3, 6:3:31] Installing service AppeventService 
+[2017-9-3, 6:3:31] Service installed 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\cleanup\cleanupService.py install  
+[2017-9-3, 6:3:31] Installing service CleanupService 
+[2017-9-3, 6:3:31] Service installed 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\event_daemon\eventDaemonService.py install  
+[2017-9-3, 6:3:31] Installing service EventDaemonService 
+[2017-9-3, 6:3:31] Service installed 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\monitorScreen\monitorScreenService.py install  
+[2017-9-3, 6:3:31] Installing service ScreenMonitorService 
+[2017-9-3, 6:3:31] Service installed 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\registerZookeeper\registerZookeeperService.py install  
+[2017-9-3, 6:3:31] Installing service RegisterZookeeperService 
+[2017-9-3, 6:3:31] Service installed 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\stateMonitor\stateMonitorService.py install  
+[2017-9-3, 6:3:31] Installing service StateMonitorService 
+[2017-9-3, 6:3:31] Service installed 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\updateResources\updateResourcesService.py install  
+[2017-9-3, 6:3:31] Installing service UpdateResourcesService 
+[2017-9-3, 6:3:31] Service installed 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\watchdog\watchdogService.py install  
+[2017-9-3, 6:3:31] Installing service WatchdogService 
+[2017-9-3, 6:3:31] Service installed 
+[2017-9-3, 6:3:31] C:\GCP-WC\gcp-wc>python .\watchdog\watchdogService.py start  
+[2017-9-3, 6:3:31] Starting service WatchdogService 
