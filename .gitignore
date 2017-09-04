@@ -1,0 +1,6 @@
+__pycache__/
+*.egg-info/
+
+# Gitignore rules for macOS
+*.DS_Store
+._*
