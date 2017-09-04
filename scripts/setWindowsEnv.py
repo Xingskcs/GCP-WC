@@ -26,7 +26,9 @@ def set_env(name, value, scope='user'):
 
 
 if __name__ == '__main__':
-    with open('configure.json', 'r') as f:
+    from os.path import abspath, join, dirname
+    configure_filename = abspath(join(dirname(__file__), '../configure.json'))
+    with open(configure_filename, 'r') as f:
         configure_data = json.load(f)
     for name in configure_data.keys():
         set_env(name, configure_data[name],'system')
