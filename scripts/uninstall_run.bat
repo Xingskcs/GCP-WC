@@ -1,19 +1,19 @@
-python .\watchdog\watchdogService.py stop
-python .\appcfgmgr\appcfgMgrService.py stop
-python .\appevents\appeventService.py stop
-python .\cleanup\cleanupService.py stop
-python .\event_daemon\eventDaemonService.py stop
-python .\registerZookeeper\registerZookeeperService.py stop
-python .\stateMonitor\stateMonitorService.py stop
-python .\updateResources\updateResourcesService.py stop
+python -m gcp_wc.watchdog_service stop
+python -m gcp_wc.app_config_manager_service stop
+python -m gcp_wc.app_event_service stop
+python -m gcp_wc.cleanup_service stop
+python -m gcp_wc.event_daemon_service stop
+python -m gcp_wc.register_zookeeper_service stop
+python -m gcp_wc.state_monitor_service stop
+python -m gcp_wc.update_resource_service stop
 TASKKILL /F /FI "services eq ScreenMonitorService"
 
-python .\watchdog\watchdogService.py remove
-python .\appcfgmgr\appcfgMgrService.py remove
-python .\appevents\appeventService.py remove
-python .\cleanup\cleanupService.py remove
-python .\event_daemon\eventDaemonService.py remove
-python .\monitorScreen\monitorScreenService.py remove
-python .\registerZookeeper\registerZookeeperService.py remove
-python .\stateMonitor\stateMonitorService.py remove
-python .\updateResources\updateResourcesService.py remove
+python -m gcp_wc.app_config_manager_service remove
+python -m gcp_wc.app_event_service remove
+python -m gcp_wc.cleanup_service remove
+python -m gcp_wc.event_daemon_service remove
+python -m gcp_wc.monitor_screen_service remove
+python -m gcp_wc.register_zookeeper_service remove
+python -m gcp_wc.state_monitor_service remove
+python -m gcp_wc.update_resource_service remove
+python -m gcp_wc.watchdog_service remove
