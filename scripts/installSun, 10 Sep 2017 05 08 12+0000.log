@@ -1,0 +1,12 @@
+Sun, 10 Sep 2017 05:08:12+0000;INFO;Successfully created work directory
+Sun, 10 Sep 2017 05:08:17+0000;INFO;Successfully installed gcp-wc
+Sun, 10 Sep 2017 05:08:20+0000;INFO;Successfully installed AppCfgMgrService
+Sun, 10 Sep 2017 05:08:20+0000;INFO;Successfully installed AppeventService
+Sun, 10 Sep 2017 05:08:21+0000;INFO;Successfully installed CleanupService
+Sun, 10 Sep 2017 05:08:22+0000;INFO;Successfully installed EventDaemonService
+Sun, 10 Sep 2017 05:08:22+0000;INFO;Successfully installed ScreenMonitorService
+Sun, 10 Sep 2017 05:08:23+0000;INFO;Successfully installed RegisterZookeeperService
+Sun, 10 Sep 2017 05:08:24+0000;INFO;Successfully installed StateMonitorService
+Sun, 10 Sep 2017 05:08:24+0000;INFO;Successfully installed UpdateResourcesService
+Sun, 10 Sep 2017 05:08:25+0000;INFO;Successfully installed WatchdogService
+Sun, 10 Sep 2017 05:08:25+0000;INFO;Successfully starting WatchdogService

@@ -15,7 +15,7 @@ import win32service
 import win32event
 
 #logging
-logging.basicConfig(filename = os.path.join(os.path.join(os.getenv("workDirectory"),'log'), 'watchdogSVC.txt'), filemode="w", level=logging.INFO)
+logging.basicConfig(filename = os.path.join(os.path.join(os.getenv("workDirectory"),'log'), 'WatchdogSVC.txt'), filemode="w", level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 formatter = logging.Formatter('# %(asctime)s - %(name)s:%(lineno)d %(levelname)s - %(message)s')
@@ -266,7 +266,7 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
     def _stop(self, services):
         for service in services:
             if service.status() == 'RUNNING':
-                if service.name == 'ScreenMonitorService' or service.name == 'CleanupService':
+                if service.name == 'ScreenMonitorService' or service.name == 'CleanupService' or service.name == 'AppCfgMgrService':
                     #os.system('TASKKILL /F /FI "services eq ScreenMonitorService"')
                     pass
                 else:
@@ -275,8 +275,12 @@ class WatchdogSvc (win32serviceutil.ServiceFramework):
     def _serviceStatus(self, services):
         for service in services:
             if service.status() == 'STOPPED':
-                logging.info('failed service: '+str(service.name))
-                return False
+                if service.name == 'AppCfgMgrService':
+                    logging.info('failed service: ' + str(service.name))
+                    service.start()
+                else:
+                    logging.info('failed service: '+str(service.name))
+                    return False
         return True
 
 def server_presence():
