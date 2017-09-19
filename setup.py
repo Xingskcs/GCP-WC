@@ -20,5 +20,5 @@ setup(
         'urllib3==1.21.1',
         'websocket-client==0.44.0',
     ],
-    python_requires="~=3.6",
+    python_requires="~=3.5",
 )
