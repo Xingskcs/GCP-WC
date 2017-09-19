@@ -1,0 +1,16 @@
+memory: 50m
+cpu: 10%
+disk: 200M
+image: dockersksjtu/test
+services:
+  - name: python_server
+    command: python test.py
+    restart:
+      interval: 60
+      limit: 5
+endpoints:
+  - name: http
+    port: 8000
+    type: infra
+
+

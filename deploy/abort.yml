@@ -1,0 +1,17 @@
+memory: 50m
+cpu: 10%
+disk: 200M
+image: python
+services:
+  - name: python_server
+    command: python -version
+    restart:
+      interval: 60
+      limit: 5
+endpoints:
+  - name: http
+    port: 8000
+    type: infra
+
+
+
