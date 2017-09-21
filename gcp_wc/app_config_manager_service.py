@@ -97,10 +97,20 @@ def configure(zk, client, root, instance_name):
     logging.info("configuring %s", instance_name)
     with open(event_file) as f:
         manifest_data = yaml.load(stream=f)
-    docker_container = client.containers.create(image = manifest_data['image'],
-                                                mem_limit = manifest_data['memory'],
-                                                cpu_percent = int(manifest_data['cpu'][:len(manifest_data['cpu'])-1]),
-                                                command = manifest_data['services'][0]['command'])
+    if manifest_data['image']=="nginx":
+        port = {}
+        container_port = '80/tcp'
+        port[container_port] = int(manifest_data['endpoints'][0]['port'])
+        docker_container = client.containers.create(image=manifest_data['image'],
+                                                    mem_limit=manifest_data['memory'],
+                                                    cpu_percent=int(
+                                                        manifest_data['cpu'][:len(manifest_data['cpu']) - 1]),
+                                                    ports=port)
+    else:
+        docker_container = client.containers.create(image = manifest_data['image'],
+                                                    mem_limit = manifest_data['memory'],
+                                                    cpu_percent = int(manifest_data['cpu'][:len(manifest_data['cpu'])-1]),
+                                                    command = manifest_data['services'][0]['command'])
 
     if docker_container in client.containers.list(all):
         post(

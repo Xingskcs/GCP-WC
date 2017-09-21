@@ -1,0 +1,16 @@
+memory: 50m
+cpu: 5%
+disk: 200M
+image: nginx
+services:
+  - name: nginx_server
+    restart:
+      interval: 60
+      limit: 5
+endpoints:
+  - name: http
+    port: 8002
+    type: infra
+
+
+

@@ -1,0 +1,11 @@
+Thu, 21 Sep 2017 10:57:45+0000;INFO;Successfully stopped AppCfgMgrService
+Thu, 21 Sep 2017 10:57:46+0000;INFO;Successfully stopped AppeventService
+Thu, 21 Sep 2017 10:57:47+0000;INFO;Successfully stopped CleanupService
+Thu, 21 Sep 2017 10:57:48+0000;INFO;Successfully stopped EventDaemonService
+Thu, 21 Sep 2017 10:57:50+0000;INFO;Successfully stopped ScreenMonitorService
+Thu, 21 Sep 2017 10:57:51+0000;INFO;Successfully stopped RegisterZookeeperService
+Thu, 21 Sep 2017 10:57:52+0000;INFO;Successfully stopped StateMonitorService
+Thu, 21 Sep 2017 10:57:53+0000;INFO;Successfully stopped UpdateResourcesService
+Thu, 21 Sep 2017 10:57:54+0000;INFO;Successfully stopped WatchdogService
+Thu, 21 Sep 2017 10:57:55+0000;INFO;Successfully removed WatchdogService
+Thu, 21 Sep 2017 10:57:57+0000;INFO;Successfully uninstalled gcp-wc

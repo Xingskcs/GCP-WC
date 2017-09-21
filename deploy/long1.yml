@@ -1,16 +1,15 @@
 memory: 50m
 cpu: 5%
 disk: 200M
-image: python
+image: nginx
 services:
-  - name: python_server
-    command: python -m wsgiref.simple_server
+  - name: nginx_server
     restart:
       interval: 60
       limit: 5
 endpoints:
   - name: http
-    port: 8000
+    port: 8001
     type: infra
 
 
