@@ -14,7 +14,7 @@ setup(
         'idna==2.5',
         'kazoo==2.4.0',
         'psutil==5.2.2',
-        'PyYAML==3.12',
+        'PyYAML==5.1',
         'requests==2.18.1',
         'six==1.10.0',
         'urllib3==1.21.1',
