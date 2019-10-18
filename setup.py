@@ -15,7 +15,7 @@ setup(
         'kazoo==2.4.0',
         'psutil==5.2.2',
         'PyYAML==3.12',
-        'requests==2.18.1',
+        'requests==2.20.0',
         'six==1.10.0',
         'urllib3==1.21.1',
         'websocket-client==0.44.0',
