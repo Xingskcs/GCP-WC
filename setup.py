@@ -17,7 +17,7 @@ setup(
         'PyYAML==3.12',
         'requests==2.18.1',
         'six==1.10.0',
-        'urllib3==1.21.1',
+        'urllib3==1.24.2',
         'websocket-client==0.44.0',
     ],
     python_requires="~=3.5",
