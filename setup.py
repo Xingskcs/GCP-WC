@@ -13,7 +13,7 @@ setup(
         'Events==0.3',
         'idna==2.5',
         'kazoo==2.4.0',
-        'psutil==5.2.2',
+        'psutil==5.6.6',
         'PyYAML==3.12',
         'requests==2.18.1',
         'six==1.10.0',
